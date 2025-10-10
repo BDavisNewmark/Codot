@@ -21,13 +21,40 @@ player1 = player(100, 100, ("blue_player.png", "blue_player_hold.png"))
 space.add(player1.body, player1.shape)
 # player1.body.apply_impulse_at_local_point((600, -1000), (0, 0))
 
+static = [
+    pymunk.Segment(space.static_body, (0, 720), (1280, 720), 10)
+]
+
+space.add(*static)
+
+
 while running:
     space.step(1 / 60)
     clock.tick(60)
     screen.fill("white")
-    
+
     for event in pygame.event.get():
-        ...
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_a:
+                player1.body.apply_force_at_local_point((-player_speed, 0), (0, 0))
+                print("a")
+            elif event.key == pygame.K_d:
+                player1.body.apply_force_at_local_point((player_speed, 0), (0, 0))
+                print("d")
+            elif event.key == pygame.K_w:
+                player1.hold(True)
+                print("w")
+        elif event.type == pygame.KEYUP:
+            if event.key == pygame.K_a:
+                print("-a")
+            elif event.key == pygame.K_d:
+                print("-d")
+            elif event.key == pygame.K_w:
+                player1.hold(False)
+                print("-w")
+        
 
     space.debug_draw(draw_options)
     pygame.display.flip()

@@ -18,3 +18,10 @@ class player():
         self.shape = pymunk.Circle(self.body, player_size)
         self.shape.mass = player_mass
         self.shape.friction = player_friction
+
+    def hold(self, b: bool):
+        self.holding = b
+        if b:
+            self.shape.friction = 1
+        else:
+            self.shape.friction = player_friction
