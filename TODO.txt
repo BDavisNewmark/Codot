@@ -1,0 +1,1 @@
+movement controled by simple motors and friction
