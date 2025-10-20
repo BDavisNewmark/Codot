@@ -5,3 +5,4 @@ player_friction = .5
 gravity = 900
 center_friction = .5
 floor_friction = 1
+player_push = 1000

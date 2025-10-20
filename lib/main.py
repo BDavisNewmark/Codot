@@ -58,7 +58,12 @@ while running:
         if j is not None:
             space.remove(*j)
             for x in j: del x
-    player1.move(m)
+    if player1.holding:
+        relative = player1.body.position.get_angle_degrees_between(player2.body.position)
+        relative += 90 if m == 1 else -90 if m == -1 else 0
+        force = pymunk.Vec2d.from_polar(player_push, relative)
+        player2.body.apply_force_at_world_point(force, player1.body.position)
+    else: player1.move(m)
 
     m = 0
     if keys[pygame.K_LEFT]: m += 1
@@ -71,7 +76,12 @@ while running:
         if j is not None:
             space.remove(*j)
             for x in j: del x
-    player2.move(m)
+    if player2.holding:
+        relative = player2.body.position.get_angle_degrees_between(player1.body.position)
+        relative += 90 if m == 1 else -90 if m == -1 else 0
+        force = pymunk.Vec2d.from_polar(player_push, relative)
+        player1.body.apply_force_at_world_point(force, player2.body.position)
+    else: player2.move(m)
     
 
     space.debug_draw(draw_options)
