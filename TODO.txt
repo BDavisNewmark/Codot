@@ -1,0 +1,2 @@
+key_down/up → key_pressed
+lock via making center static
