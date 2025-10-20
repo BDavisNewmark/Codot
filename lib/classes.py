@@ -15,6 +15,7 @@ class player():
         
         self.body = pymunk.Body()
         self.body.position = x, y
+        
         self.shape = pymunk.Circle(self.body, player_size)
         self.shape.mass = player_mass
         self.shape.friction = player_friction
@@ -30,9 +31,11 @@ class player():
     def hold(self, b: bool):
         self.holding = b
         if b:
-            self.shape.friction = 99999
+            self.center.body_type = pymunk.Body.DYNAMIC
+            self.body.body_type = pymunk.Body.KINEMATIC
         else:
-            self.shape.friction = player_friction
+            self.body.body_type = pymunk.Body.DYNAMIC
+            self.center.body_type = pymunk.Body.KINEMATIC
 
     def move(self, direction: int):
         self.motor.rate = player_speed if direction == 1 else -player_speed if direction == -1 else 0

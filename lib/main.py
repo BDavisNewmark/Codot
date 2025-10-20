@@ -19,7 +19,12 @@ draw_options = pygame_util.DrawOptions(screen)
 
 player1 = player(100, 100, ("blue_player.png", "blue_player_hold.png"))
 space.add(player1.body, player1.shape, player1.center, player1.motor)
-# player1.body.apply_impulse_at_local_point((600, -1000), (0, 0))
+
+player2 = player(500, 100, ("red_player.png", "red_player_hold.png"))
+space.add(player2.body, player2.shape, player2.center, player2.motor)
+
+rod = pymunk.PinJoint(player1.body, player2.body, (0, 0), (0, 0))
+space.add(rod)
 
 static = [
     pymunk.Segment(space.static_body, (0, 720), (1280, 720), 10)
@@ -36,38 +41,26 @@ while running:
     clock.tick(60)
     screen.fill("white")
 
-    player1.motor.activate_bodies()
-
-    m = False
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_a:
-                m = True
-                player1.move(1)
-                print("a")
-            elif event.key == pygame.K_d:
-                m = True
-                player1.move(-1)
-                print("d")
-            elif event.key == pygame.K_w:
-                player1.hold(True)
-                print("w")
-        elif event.type == pygame.KEYUP:
-            if event.key == pygame.K_a:
-                player1.move(0)
-                print("-a")
-            elif event.key == pygame.K_d:
-                player1.move(0)
-                print("-d")
-            elif event.key == pygame.K_w:
-                player1.hold(False)
-                print("-w")
+    
+    keys = pygame.key.get_pressed()
 
-    print(player1.motor.impulse)
-        
+    m = 0
+    if keys[pygame.K_a]: m += 1
+    if keys[pygame.K_d]: m -= 1
+    # if keys[pygame.K_w]: player1.hold(True)
+    # else: player1.hold(False)
+    player1.move(m)
+
+    m = 0
+    if keys[pygame.K_LEFT]: m += 1
+    if keys[pygame.K_RIGHT]: m -= 1
+    # if keys[pygame.K_UP]: player2.hold(True)
+    # else: player2.hold(False)
+    player2.move(m)
+    
 
     space.debug_draw(draw_options)
     pygame.display.flip()
