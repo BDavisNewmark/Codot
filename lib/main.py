@@ -50,15 +50,27 @@ while running:
     m = 0
     if keys[pygame.K_a]: m += 1
     if keys[pygame.K_d]: m -= 1
-    # if keys[pygame.K_w]: player1.hold(True)
-    # else: player1.hold(False)
+    if keys[pygame.K_w]:
+        j = player1.hold(True)
+        if j is not None: space.add(*j)
+    else:
+        j = player1.hold(False)
+        if j is not None:
+            space.remove(*j)
+            for x in j: del x
     player1.move(m)
 
     m = 0
     if keys[pygame.K_LEFT]: m += 1
     if keys[pygame.K_RIGHT]: m -= 1
-    # if keys[pygame.K_UP]: player2.hold(True)
-    # else: player2.hold(False)
+    if keys[pygame.K_UP]:
+        j = player2.hold(True)
+        if j is not None: space.add(*j)
+    else:
+        j = player2.hold(False)
+        if j is not None:
+            space.remove(*j)
+            for x in j: del x
     player2.move(m)
     
 
