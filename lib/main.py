@@ -3,6 +3,7 @@ import pymunk
 from pymunk import pygame_util
 from classes import *
 from constants import *
+from math import pi
 
 pygame.init()
 
@@ -59,15 +60,17 @@ while running:
             space.remove(*j)
             for x in j: del x
     if player1.holding:
-        relative = player1.body.position.get_angle_degrees_between(player2.body.position)
-        relative += 90 if m == 1 else -90 if m == -1 else 0
-        force = pymunk.Vec2d.from_polar(player_push, relative)
-        player2.body.apply_force_at_world_point(force, player1.body.position)
-    else: player1.move(m)
+        player1.move(0)
+        if m != 0:
+            relative = player1.body.position.get_angle_between(player2.body.position)
+            if player1.body.position.x > player2.body.position.x: relative += pi
+            relative -= m * pi / 2
+            force = pymunk.Vec2d.from_polar(player_push, relative)
+            player2.body.apply_force_at_local_point(force, (0, 0))
 
-    m = 0
-    if keys[pygame.K_LEFT]: m += 1
-    if keys[pygame.K_RIGHT]: m -= 1
+    n = 0
+    if keys[pygame.K_LEFT]: n += 1
+    if keys[pygame.K_RIGHT]: n -= 1
     if keys[pygame.K_UP]:
         j = player2.hold(True)
         if j is not None: space.add(*j)
@@ -77,11 +80,17 @@ while running:
             space.remove(*j)
             for x in j: del x
     if player2.holding:
-        relative = player2.body.position.get_angle_degrees_between(player1.body.position)
-        relative += 90 if m == 1 else -90 if m == -1 else 0
-        force = pymunk.Vec2d.from_polar(player_push, relative)
-        player1.body.apply_force_at_world_point(force, player2.body.position)
-    else: player2.move(m)
+        player2.move(0)
+        if n != 0:
+            relative = player2.body.position.get_angle_between(player1.body.position)
+            if player2.body.position.x > player1.body.position.x: relative += pi
+            relative -= n * pi / 2
+            force = pymunk.Vec2d.from_polar(player_push, relative)
+            player1.body.apply_force_at_local_point(force, (0, 0))
+
+    if not (player1.holding or player2.holding):
+        player1.move(m)
+        player2.move(n)
     
 
     space.debug_draw(draw_options)
