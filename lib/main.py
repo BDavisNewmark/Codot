@@ -18,7 +18,7 @@ space.gravity = 0, gravity
 draw_options = pygame_util.DrawOptions(screen)
 
 
-player1 = player(100, 100, ("blue_player.png", "blue_player_hold.png"))
+player1 = player(300, 100, ("blue_player.png", "blue_player_hold.png"))
 space.add(player1.body, player1.shape, player1.center, player1.motor)
 
 player2 = player(500, 100, ("red_player.png", "red_player_hold.png"))
