@@ -67,6 +67,7 @@ while running:
             relative -= m * pi / 2
             force = pymunk.Vec2d.from_polar(player_push, relative)
             player2.body.apply_force_at_local_point(force, (0, 0))
+    else: player1.move(m)
 
     n = 0
     if keys[pygame.K_LEFT]: n += 1
@@ -87,10 +88,7 @@ while running:
             relative -= n * pi / 2
             force = pymunk.Vec2d.from_polar(player_push, relative)
             player1.body.apply_force_at_local_point(force, (0, 0))
-
-    if not (player1.holding or player2.holding):
-        player1.move(m)
-        player2.move(n)
+    else: player2.move(n)
     
 
     space.debug_draw(draw_options)
