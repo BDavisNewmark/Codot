@@ -2,6 +2,7 @@ import pygame
 import pymunk
 from typing import *
 from constants import *
+from math import *
 pygame.init()
 
 
@@ -54,3 +55,11 @@ class player():
 
     def move(self, direction: int):
         self.motor.rate = player_speed if direction == 1 else -player_speed if direction == -1 else 0
+
+    def __sub__(self, other: "player") -> float:
+        ax, ay = self.body.position
+        bx, by = other.body.position
+        cx, cy = ax - bx, ay - by
+        r = (cx ** 2 + cy ** 2) ** .5
+        cx, cy = cx / r, cy / r
+        return acos(cx) if cy > 0 else 2 * pi - acos(cx)

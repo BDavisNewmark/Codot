@@ -62,10 +62,9 @@ while running:
     if player1.holding:
         player1.move(0)
         if m != 0:
-            relative = player1.body.position.get_angle_between(player2.body.position)
-            if player1.body.position.x > player2.body.position.x: relative += pi
-            relative -= m * pi / 2
-            force = pymunk.Vec2d.from_polar(player_push, relative)
+            angle = player1 - player2
+            angle = angle + pi / 2 if m == 1 else angle - pi / 2
+            force = pymunk.Vec2d.from_polar(player_push, angle)
             player2.body.apply_force_at_local_point(force, (0, 0))
     else: player1.move(m)
 
@@ -83,10 +82,9 @@ while running:
     if player2.holding:
         player2.move(0)
         if n != 0:
-            relative = player2.body.position.get_angle_between(player1.body.position)
-            if player2.body.position.x > player1.body.position.x: relative += pi
-            relative -= n * pi / 2
-            force = pymunk.Vec2d.from_polar(player_push, relative)
+            angle = player2 - player1
+            angle = angle + pi / 2 if n == 1 else angle - pi / 2
+            force = pymunk.Vec2d.from_polar(player_push, angle)
             player1.body.apply_force_at_local_point(force, (0, 0))
     else: player2.move(n)
     
