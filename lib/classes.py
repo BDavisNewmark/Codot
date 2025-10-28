@@ -9,8 +9,8 @@ pygame.init()
 
 class player():
     def __init__(self, x: float, y: float, sprites: Tuple[str, str]):
-        self.spriteN = pygame.image.load(f"./sprites/{sprites[0]}")
-        self.spriteH = pygame.image.load(f"./sprites/{sprites[1]}")
+        self.spriteN = pygame.image.load(f"./sprites/player/{sprites[0]}")
+        self.spriteH = pygame.image.load(f"./sprites/player/{sprites[1]}")
         self.holding = False
         self.sprite = lambda : self.spriteH if self.holding else self.spriteN
         
