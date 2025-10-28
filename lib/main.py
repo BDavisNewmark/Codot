@@ -27,14 +27,18 @@ space.add(player2.body, player2.shape, player2.center, player2.motor)
 rod = pymunk.PinJoint(player1.body, player2.body, (0, 0), (0, 0))
 space.add(rod)
 
+hbody = pymunk.Body(body_type = pymunk.Body.STATIC)
+
 static = [
-    pymunk.Segment(space.static_body, (0, 720), (1280, 720), 10)
+    pymunk.Segment(space.static_body, (0, 720), (1280, 720), 10),
+    pymunk.Segment(hbody, (0, 0), (1280, 0), 10),
+    pymunk.Segment(hbody, (0, 0), (0, 720), 10)
 ]
 
-for s in static:
-    s.friction = floor_friction
+for x in static:
+    x.friction = floor_friction
 
-space.add(*static)
+space.add(hbody, *static)
 
 
 while running:
@@ -51,7 +55,7 @@ while running:
     m = 0
     if keys[pygame.K_a]: m += 1
     if keys[pygame.K_d]: m -= 1
-    if keys[pygame.K_w]:
+    if keys[pygame.K_w] and player1.holdable(hbody, space):
         j = player1.hold(True)
         if j is not None: space.add(*j)
     else:
@@ -71,7 +75,7 @@ while running:
     n = 0
     if keys[pygame.K_LEFT]: n += 1
     if keys[pygame.K_RIGHT]: n -= 1
-    if keys[pygame.K_UP]:
+    if keys[pygame.K_UP] and player2.holdable(hbody, space):
         j = player2.hold(True)
         if j is not None: space.add(*j)
     else:

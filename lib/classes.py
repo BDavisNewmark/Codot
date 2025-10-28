@@ -63,3 +63,11 @@ class player():
         r = (cx ** 2 + cy ** 2) ** .5
         cx, cy = cx / r, cy / r
         return acos(cx) if cy > 0 else 2 * pi - acos(cx)
+
+    def holdable(self, sticky: pymunk.Body, space: pymunk.Space) -> bool:
+        can = False
+        for x in space.shape_query(self.shape):
+            if sticky is x.shape.body:
+                can = True
+                break
+        return can
