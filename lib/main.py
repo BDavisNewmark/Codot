@@ -66,10 +66,10 @@ while running:
     if player1.holding:
         player1.move(0)
         if m != 0:
-            angle = player1 - player2
-            angle -= m * pi / 2
-            angle %= 2 * pi
-            force = pymunk.Vec2d.from_polar(player_push, angle)
+            mangle = player1 - player2
+            mangle -= m * pi / 2
+            mangle %= 2 * pi
+            force = (cos(mangle) * player_push, sin(mangle) * player_push)
             player2.body.apply_force_at_local_point(force, (0, 0))
     else: player1.move(m)
 
@@ -87,10 +87,10 @@ while running:
     if player2.holding:
         player2.move(0)
         if n != 0:
-            angle = player2 - player1
-            angle -= n * pi / 2
-            angle %= 2 * pi
-            force = pymunk.Vec2d.from_polar(player_push, angle)
+            nangle = player2 - player1
+            nangle -= n * pi / 2
+            nangle %= 2 * pi
+            force = (cos(nangle) * player_push, sin(nangle) * player_push)
             player1.body.apply_force_at_local_point(force, (0, 0))
     else: player2.move(n)
     
