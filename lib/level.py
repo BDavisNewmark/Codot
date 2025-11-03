@@ -11,6 +11,7 @@ pygame.init()
 
 desksize = pygame.display.get_desktop_sizes()[0]
 scale = min(desksize[0] / 1280, desksize[1] / 720)
+scale = 1
 screen = pygame.display.set_mode((int(1280 * scale), int(720 * scale)))
 clock = pygame.time.Clock()
 running = True
@@ -34,7 +35,7 @@ hbody = pymunk.Body(body_type = pymunk.Body.STATIC)
 
 static = [
     pymunk.Segment(space.static_body, (0, 720), (1280, 720), 10),
-    pymunk.Segment(hbody, (0, 0), (1280, 0), 10),
+    pymunk.Segment(hbody, (1280, 0), (1280, 720), 10),
     pymunk.Segment(hbody, (0, 0), (0, 720), 10)
 ]
 
