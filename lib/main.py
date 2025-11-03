@@ -25,6 +25,7 @@ player2 = player(500, 100, ("red_player.png", "red_player_hold.png"))
 space.add(player2.body, player2.shape, player2.center, player2.motor)
 
 rod = pymunk.PinJoint(player1.body, player2.body, (0, 0), (0, 0))
+rod.error_bias = 0.1 ** 60
 space.add(rod)
 
 hbody = pymunk.Body(body_type = pymunk.Body.STATIC)
@@ -67,10 +68,10 @@ while running:
         player1.move(0)
         if m != 0:
             mangle = player1 - player2
-            mangle -= m * pi / 2
+            mangle += m * pi / 2
             mangle %= 2 * pi
             force = (cos(mangle) * player_push, sin(mangle) * player_push)
-            player2.body.apply_force_at_local_point(force, (0, 0))
+            player2.body.apply_force_at_world_point(force, player2.body.position)
     else: player1.move(m)
 
     n = 0
@@ -88,10 +89,10 @@ while running:
         player2.move(0)
         if n != 0:
             nangle = player2 - player1
-            nangle -= n * pi / 2
+            nangle += n * pi / 2
             nangle %= 2 * pi
             force = (cos(nangle) * player_push, sin(nangle) * player_push)
-            player1.body.apply_force_at_local_point(force, (0, 0))
+            player1.body.apply_force_at_world_point(force, player1.body.position)
     else: player2.move(n)
     
 
