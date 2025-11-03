@@ -6,8 +6,8 @@ A teamwork platformer where you play with 2 circles attached a fixed position aw
 
 | Key | Action |
 | :---: | :--- |
-| `A` / `←` | Roll counter-clockwise; Move rod counterclockwise while stuck. |
-| `D` / `→` | Roll clockwise; Move rod clockwise while stuck. |
+| `A` / `←` | Roll counter-clockwise. Move rod counterclockwise while stuck. |
+| `D` / `→` | Roll clockwise. Move rod clockwise while stuck. |
 | `W` / `↑` | Stick to a sticky surface. |
 
 ## Hints
