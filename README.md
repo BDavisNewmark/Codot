@@ -16,4 +16,4 @@ A teamwork platformer where you play with 2 circles attached a fixed position aw
 
 ## Credits
 * **Bach Davis** ﻿ ﻿ ﻿ ﻿ - ﻿ ﻿ ﻿ ﻿ *Code, Music*
-* **Nolan McCall** ﻿ ﻿ ﻿ ﻿ - ﻿ ﻿ ﻿ ﻿ *Artwork, Level design*
+* **Nolan McCall** ﻿ ﻿ ﻿ ﻿ - ﻿ ﻿ ﻿ ﻿ *Artwork, Level Design*
