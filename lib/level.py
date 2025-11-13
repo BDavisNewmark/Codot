@@ -44,7 +44,9 @@ for x in static:
 space.add(hbody, *static)
 
 
-while running:
+def main():
+    global running, screen, space, clock, draw_options, player1, player2, hbody
+    
     space.step(1 / 60)
     clock.tick(60)
     screen.fill("white")
@@ -98,5 +100,5 @@ while running:
     else: player2.move(n)
     
 
-    space.debug_draw(draw_options)
-    pygame.display.flip()
+    # space.debug_draw(draw_options)
+    # pygame.display.flip()
