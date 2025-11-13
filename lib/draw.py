@@ -13,4 +13,11 @@ def draw() -> pygame.Surface:
     bg = pygame.transform.scale_by(bg, scalef(*screen.get_size(), *bg.get_size()))
     screen.blit(bg, (0, 0))
 
+    ground = pymunk.Space()
+    groundv = pymunk.pygame_util.DrawOptions(screen)
+    body = space.static_body.copy()
+    for x in body.shapes:
+        groundv.color_for_shape(x, pygame.Color("black"))
+    ground.add(body)
+    ground.debug_draw(groundv)
     
