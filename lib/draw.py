@@ -1,5 +1,6 @@
 import pygame
 import pymunk
+from pymunk import pygame_util
 import level
 
 
@@ -14,10 +15,10 @@ def draw() -> pygame.Surface:
     screen.blit(bg, (0, 0))
 
     ground = pymunk.Space()
-    groundv = pymunk.pygame_util.DrawOptions(screen)
+    groundv = pygame_util.DrawOptions(screen)
     body = space.static_body.copy()
-    for x in body.shapes:
-        groundv.color_for_shape(x, pygame.Color("black"))
+    groundv.shape_outline_color = (0, 0, 0, 0)
+    groundv.shape_static_color = (0, 0, 0, 255)
     ground.add(body)
     ground.debug_draw(groundv)
     
