@@ -1,6 +1,6 @@
 level_w,level_h,player1_x,player1_y,player2_x,player2_y,win_x,win_y
-gl,x,y,x,y
-hl,x,y,x,y
+gl,x,y,x,y,width
+hl,x,y,x,y,width
 gp,x,y,x,y,x,y,...
 hp,x,y,x,y,x,y,...
 ga,x,y,in_rad,out_rad,start_deg,end_deg
