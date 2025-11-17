@@ -31,5 +31,5 @@ def load(level: int, space: pymunk.Space, sticky: pymunk.Body, g: bool = True, h
                     for i in range(circle_sides):
                         angle = radians(float(row[5])) + (circle_sides - i - 1) * (float(row[6]) - float(row[5])) / circle_sides
                         points.append((float(row[1]) + float(row[4]) * cos(angle), float(row[2]) + float(row[4]) * sin(angle)))
-                    space.add(pymunk.Poly(b, points))
+                    space.add(pymunk.Poly(b, points)) # type: ignore
     return output # type: ignore
