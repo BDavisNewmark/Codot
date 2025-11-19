@@ -17,7 +17,8 @@ pygame.display.set_caption("Codot")
 
 
 def init(level: int):
-    global running, space, clock, draw_options, player1, player2, hbody, dim, gp
+    global running, space, clock, draw_options, player1, player2, hbody, dim, gp, levelnum
+    levelnum = level
     clock = pygame.time.Clock()
     running = True
     space = pymunk.Space()

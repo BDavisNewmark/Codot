@@ -6,4 +6,4 @@ gravity = 900
 center_friction = .5
 floor_friction = 1
 player_push = 20000
-circle_sides = 30
+circle_sides = 99
