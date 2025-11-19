@@ -3,6 +3,7 @@ import pymunk
 from pymunk import pygame_util
 from classes import *
 from constants import *
+import map
 from math import pi
 
 pygame.init()
@@ -12,39 +13,33 @@ pygame.init()
 desksize = pygame.display.get_desktop_sizes()[0]
 scale = min(1, desksize[0] / 1280, desksize[1] / 720)
 screen = pygame.display.set_mode((int(1280 * scale), int(720 * scale)))
-clock = pygame.time.Clock()
-running = True
-space = pymunk.Space()
-space.gravity = 0, gravity
-
-draw_options = pygame_util.DrawOptions(screen)
+pygame.display.set_caption("Codot")
 
 
-player1 = player(300, 100, ("blue_player.png", "blue_player_hold.png"))
-space.add(player1.body, player1.shape, player1.center, player1.motor)
+def init(level: int):
+    global running, space, clock, draw_options, player1, player2, hbody, dim, gp
+    clock = pygame.time.Clock()
+    running = True
+    space = pymunk.Space()
+    space.gravity = 0, gravity
+    draw_options = pygame_util.DrawOptions(screen)
+    hbody = pymunk.Body(body_type = pymunk.Body.STATIC)
+    space.add(hbody)
+    dim, p1p, p2p, gp = map.load(level, space, hbody) # type: ignore
 
-player2 = player(500, 100, ("red_player.png", "red_player_hold.png"))
-space.add(player2.body, player2.shape, player2.center, player2.motor)
-
-rod = pymunk.PinJoint(player1.body, player2.body, (0, 0), (0, 0))
-rod.error_bias = 0.1 ** 60
-space.add(rod)
-
-hbody = pymunk.Body(body_type = pymunk.Body.STATIC)
-
-static = [
-    pymunk.Segment(space.static_body, (0, 720 * scale), (1280 * scale, 720 * scale), 10),
-    pymunk.Segment(hbody, (1280 * scale, 0), (1280 * scale, 720 * scale), 10),
-    pymunk.Segment(hbody, (0, 0), (0, 720 * scale), 10)
-]
-
-for x in static:
-    x.friction = floor_friction
-
-space.add(hbody, *static)
+    player1 = player(p1p[0], p1p[1], ("blue_player.png", "blue_player_hold.png"))
+    space.add(player1.body, player1.shape, player1.center, player1.motor)
+    
+    player2 = player(p2p[0], p2p[1], ("red_player.png", "red_player_hold.png"))
+    space.add(player2.body, player2.shape, player2.center, player2.motor)
+    
+    rod = pymunk.PinJoint(player1.body, player2.body, (0, 0), (0, 0))
+    rod.error_bias = 0.1 ** 60
+    space.add(rod)
 
 
-def main():
+
+def step():
     global running, screen, space, clock, draw_options, player1, player2, hbody
     
     space.step(1 / 60)

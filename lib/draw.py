@@ -4,8 +4,10 @@ from pymunk import pygame_util
 import level
 
 
-screen = level.screen
-space = level.space
+def init():
+    global screen, space
+    screen = level.screen
+    space = level.space
 
 scalef = lambda x1, y1, x2, y2 : max(x1 / x2, y1 / y2)
 
