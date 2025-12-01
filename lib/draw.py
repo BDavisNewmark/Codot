@@ -1,4 +1,5 @@
 import pygame
+from pygame.transform import average_color
 import pymunk
 from pymunk import pygame_util
 import map
@@ -25,12 +26,19 @@ def draw() -> pygame.Surface:
 
     mask = pygame.Surface(lscreen.get_size())
     ground = pymunk.Space()
-    groundv = pygame_util.DrawOptions(lscreen)
+    groundv = pygame_util.DrawOptions(mask)
     gbody = pymunk.Body(body_type = pymunk.Body.STATIC)
     ground.add(gbody)
     map.load(levelnum, ground, gbody, True, False)
     gsprite = pygame.image.load("./sprites/level/ground.png")
     gsprite = pygame.transform.scale_by(gsprite, scalef(*lscreen.get_size(), *gsprite.get_size()))
     ground.debug_draw(groundv)
-    gshown = pygame.mask.from_surface(mask, 127)
-    
+    mask.blit(lscreen, (0, 0))
+    back = pygame.Surface(lscreen.get_size())
+    back.fill("black")
+    back.blit(mask, (0, 0), special_flags = pygame.BLEND_RGBA_SUB)
+    fore = average_color(mask)
+    back.set_colorkey(fore)
+    gsprite.blit(back, (0, 0), special_flags = pygame.BLEND_RGBA_SUB)
+    gsprite.set_colorkey("black")
+    screen.blit(gsprite, (0, 0))
