@@ -6,9 +6,13 @@ import map
 import level
 
 
+dev_mode = True
+sticky_ground_type = False
+
+
 
 def init():
-    global screen, space, scale, dim, gp, levelnum, lscreen
+    global screen, space, scale, dim, gp, levelnum, lscreen, draw_options
     screen = level.screen
     space = level.space
     scale = level.scale
@@ -16,18 +20,33 @@ def init():
     gp = level.gp
     levelnum = level.levelnum
     lscreen = pygame.Surface(dim)
+    draw_options = level.draw_options
     
 
-scalef = lambda x1, y1, x2, y2 : max(x1 / x2, y1 / y2)
+scalef = lambda x1, y1, x2, y2 : min(x1 / x2, y1 / y2)
 
 
 def draw():
     global lscreen
-    bg = pygame.image.load("./sprites/level/bg.png")
-    bg = pygame.transform.scale_by(bg, scalef(*screen.get_size(), *bg.get_size()))
-    screen.blit(bg, (0, 0))
+    if dev_mode:
+        lscreen.fill("white")
+        gspace = pymunk.Space()
+        hbody = pymunk.Body(body_type = pymunk.Body.STATIC)
+        gspace.add(hbody)
+        ground = map.load(levelnum, gspace, hbody, not sticky_ground_type, sticky_ground_type)
+        dog = pygame_util.DrawOptions(lscreen)
+        gspace.debug_draw(dog)
+        lscreen = pygame.transform.scale_by(lscreen, scalef(*screen.get_size(), *dim))
+        screen.blit(lscreen, (0, 0))
+        pygame.display.flip()
+        
+    else:
+        bg = pygame.image.load("./sprites/level/bg.png")
+        bg = pygame.transform.scale_by(bg, scale)
+        screen.blit(bg, (0, 0))
 
-    mask = pygame.Surface(lscreen.get_size())
+    
+    """mask = pygame.Surface(lscreen.get_size())
     ground = pymunk.Space()
     groundv = pygame_util.DrawOptions(mask)
     gbody = pymunk.Body(body_type = pymunk.Body.STATIC)
@@ -66,4 +85,4 @@ def draw():
     lscreen.blit(hgsprite, (0, 0), special_flags = pygame.BLEND_RGB_SUB)
 
     lscreen = pygame.transform.scale_by(lscreen, scalef(*screen.get_size(), *lscreen.get_size()))
-    screen.blit(lscreen, (0, 0))
+    screen.blit(lscreen, (0, 0))"""

@@ -3,7 +3,7 @@ import level
 import draw
 
 
-level.init(0)
+level.init(2)
 draw.init()
 
 while level.running:
