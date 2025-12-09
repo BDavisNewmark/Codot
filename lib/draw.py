@@ -44,6 +44,12 @@ def draw():
         bg = pygame.image.load("./sprites/level/bg.png")
         bg = pygame.transform.scale_by(bg, scale)
         screen.blit(bg, (0, 0))
+        img1 = pygame.image.load(f"./sprites/maps/level_{levelnum}/normal.png")
+        img1 = pygame.transform.scale_by(img1, scale)
+        img2 = pygame.image.load(f"./sprites/maps/level_{levelnum}/sticky.png")
+        img2 = pygame.transform.scale_by(img2, scale)
+        screen.blit(img1, (0, 0))
+        screen.blit(img2, (0, 0))
 
     
     """mask = pygame.Surface(lscreen.get_size())

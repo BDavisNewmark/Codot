@@ -29,13 +29,14 @@ def load(level: int, space: pymunk.Space, sticky: pymunk.Body, g: bool = True, h
                     x.friction = floor_friction
                     space.add(x)
                 elif "a" in row[0]:
+                    xc, yc, inr, outr, start, end = float(row[1]), float(row[2]), float(row[3]), float(row[4]), float(row[5]), float(row[6])
                     points = []
                     for i in range(circle_sides):
-                        angle = radians(float(row[5])) + i * (float(row[6]) - float(row[5])) / circle_sides
-                        points.append((float(row[1]) + float(row[3]) * cos(angle), float(row[2]) + float(row[3]) * sin(angle)))
+                        angle = radians(start + i * (end - start) / circle_sides)
+                        points.append((xc + outr * cos(angle), yc + outr * sin(angle)))
                     for i in range(circle_sides):
-                        angle = radians(float(row[5])) + (circle_sides - i - 1) * (float(row[6]) - float(row[5])) / circle_sides
-                        points.append((float(row[1]) + float(row[4]) * cos(angle), float(row[2]) + float(row[4]) * sin(angle)))
+                        angle = radians(end - (i + 1) * (end - start) / circle_sides)
+                        points.append((xc + inr * cos(angle), yc + inr * sin(angle)))
                     x = pymunk.Poly(b, points) # type: ignore
                     x.friction = floor_friction
                     space.add(x)

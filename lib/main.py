@@ -5,7 +5,7 @@ import datetime
 from time import sleep
 
 
-if datetime.datetime.now().month == 4 and datetime.datetime.now().day == 1:
+"""if datetime.datetime.now().month == 4 and datetime.datetime.now().day == 1:
     desksize = pygame.display.get_desktop_sizes()[0]
     scale = min(1, desksize[0] / 1280, desksize[1] / 720)
     screen = pygame.display.set_mode((int(1280 * scale), int(720 * scale)))
@@ -18,7 +18,7 @@ if datetime.datetime.now().month == 4 and datetime.datetime.now().day == 1:
     pygame.display.flip()
     sleep(10)
     pygame.quit()
-    exit()
+    exit()"""
 
 
 level.init(2)
