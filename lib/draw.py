@@ -4,6 +4,8 @@ import pymunk
 from pymunk import pygame_util
 import map
 import level
+from constants import *
+from math import *
 
 
 dev_mode = True
@@ -12,7 +14,7 @@ sticky_ground_type = False
 
 
 def init():
-    global screen, space, scale, dim, gp, levelnum, lscreen, draw_options
+    global screen, space, scale, dim, gp, levelnum, lscreen, draw_options, player1, player2
     screen = level.screen
     space = level.space
     scale = level.scale
@@ -21,6 +23,8 @@ def init():
     levelnum = level.levelnum
     lscreen = pygame.Surface(dim)
     draw_options = level.draw_options
+    player1 = level.player1
+    player2 = level.player2
     
 
 scalef = lambda x1, y1, x2, y2 : min(x1 / x2, y1 / y2)
@@ -44,12 +48,30 @@ def draw():
         bg = pygame.image.load("./sprites/level/bg.png")
         bg = pygame.transform.scale_by(bg, scale)
         screen.blit(bg, (0, 0))
+        
         img1 = pygame.image.load(f"./sprites/maps/level_{levelnum}/normal.png")
         img1 = pygame.transform.scale_by(img1, scale)
         img2 = pygame.image.load(f"./sprites/maps/level_{levelnum}/sticky.png")
         img2 = pygame.transform.scale_by(img2, scale)
+        
         screen.blit(img1, (0, 0))
         screen.blit(img2, (0, 0))
+        sprite1 = level.player1.sprite()
+        sprite1 = pygame.transform.scale_by(sprite1, scale)
+        screen.blit(sprite1, (player1.body.position[0] * scale - sprite1.get_width() / 2, player1.body.position[1] * scale - sprite1.get_height() / 2))
+        
+        sprite2 = level.player2.sprite()
+        sprite2 = pygame.transform.scale_by(sprite2, scale)
+        screen.blit(sprite2, (player2.body.position[0] * scale - sprite2.get_width() / 2, player2.body.position[1] * scale - sprite2.get_height() / 2))
+
+        girth = player1.shape.radius * rod_girth * scale
+        rod = pygame.image.load("./sprites/player/rod.png")
+        rod = pygame.transform.scale(rod, (player1 + player2, girth))
+        rod = pygame.transform.rotate(rod, degrees(player1 - player2))
+        rod = pygame.transform.scale_by(rod, scale)
+        screen.blit(rod, (player1.body.position[0] * scale - rod.get_width() / 2, player1.body.position[1] * scale - rod.get_height() / 2))
+        
+        pygame.display.flip()
 
     
     """mask = pygame.Surface(lscreen.get_size())
