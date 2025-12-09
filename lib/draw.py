@@ -9,7 +9,7 @@ from math import *
 
 
 dev_mode = True
-sticky_ground_type = False
+sticky_ground_type = True
 
 
 
@@ -70,6 +70,12 @@ def draw():
         rod = pygame.transform.rotate(rod, degrees(player1 - player2))
         rod = pygame.transform.scale_by(rod, scale)
         screen.blit(rod, (player1.body.position[0] * scale - rod.get_width() / 2, player1.body.position[1] * scale - rod.get_height() / 2))
+
+        goal = pygame.image.load("./sprites/level/goal.png")
+        goal = pygame.transform.scale(goal, (20, 20))
+        goal = pygame.transform.scale_by(goal, scale)
+        screen.blit(goal, (gp[0] * scale - goal.get_width() / 2, gp[1] * scale - goal.get_height() / 2))
+        
         
         pygame.display.flip()
 
