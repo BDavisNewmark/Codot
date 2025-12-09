@@ -8,7 +8,7 @@ from constants import *
 from math import *
 
 
-dev_mode = True
+dev_mode = False
 sticky_ground_type = True
 
 
@@ -51,18 +51,11 @@ def draw():
         
         img1 = pygame.image.load(f"./sprites/maps/level_{levelnum}/normal.png")
         img1 = pygame.transform.scale_by(img1, scale)
+        screen.blit(img1, (0, 0))
+        
         img2 = pygame.image.load(f"./sprites/maps/level_{levelnum}/sticky.png")
         img2 = pygame.transform.scale_by(img2, scale)
-        
-        screen.blit(img1, (0, 0))
         screen.blit(img2, (0, 0))
-        sprite1 = level.player1.sprite()
-        sprite1 = pygame.transform.scale_by(sprite1, scale)
-        screen.blit(sprite1, (player1.body.position[0] * scale - sprite1.get_width() / 2, player1.body.position[1] * scale - sprite1.get_height() / 2))
-        
-        sprite2 = level.player2.sprite()
-        sprite2 = pygame.transform.scale_by(sprite2, scale)
-        screen.blit(sprite2, (player2.body.position[0] * scale - sprite2.get_width() / 2, player2.body.position[1] * scale - sprite2.get_height() / 2))
 
         girth = player1.shape.radius * rod_girth * scale
         rod = pygame.image.load("./sprites/player/rod.png")
@@ -75,6 +68,14 @@ def draw():
         goal = pygame.transform.scale(goal, (20, 20))
         goal = pygame.transform.scale_by(goal, scale)
         screen.blit(goal, (gp[0] * scale - goal.get_width() / 2, gp[1] * scale - goal.get_height() / 2))
+        
+        sprite1 = level.player1.sprite()
+        sprite1 = pygame.transform.scale_by(sprite1, scale)
+        screen.blit(sprite1, (player1.body.position[0] * scale - sprite1.get_width() / 2, player1.body.position[1] * scale - sprite1.get_height() / 2))
+        
+        sprite2 = level.player2.sprite()
+        sprite2 = pygame.transform.scale_by(sprite2, scale)
+        screen.blit(sprite2, (player2.body.position[0] * scale - sprite2.get_width() / 2, player2.body.position[1] * scale - sprite2.get_height() / 2))
         
         
         pygame.display.flip()
