@@ -7,4 +7,6 @@ center_friction = .5
 floor_friction = 1
 player_push = 20000
 circle_sides = 5
-rod_girth = .1
+rod_girth = .5
+flag_size = 100
+behind = (100, 100, 100)

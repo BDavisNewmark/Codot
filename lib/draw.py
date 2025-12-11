@@ -45,39 +45,41 @@ def draw():
         pygame.display.flip()
         
     else:
+        lscreen = pygame.Surface(dim)
+        lscreen.fill(behind)
+        screen.fill(behind)
+        
         bg = pygame.image.load("./sprites/level/bg.png")
-        bg = pygame.transform.scale_by(bg, scale)
-        screen.blit(bg, (0, 0))
+        bg = pygame.transform.scale(bg, lscreen.get_size())
+        lscreen.blit(bg, (0, 0))
         
-        img1 = pygame.image.load(f"./sprites/maps/level_{levelnum}/normal.png")
-        img1 = pygame.transform.scale_by(img1, scale)
-        screen.blit(img1, (0, 0))
+        img1 = pygame.image.load(f"./sprites/maps/level_{levelnum}/sticky.png")
+        img1.set_colorkey("white")
+        lscreen.blit(img1, (0, 0))
         
-        img2 = pygame.image.load(f"./sprites/maps/level_{levelnum}/sticky.png")
-        img2 = pygame.transform.scale_by(img2, scale)
-        screen.blit(img2, (0, 0))
+        img2 = pygame.image.load(f"./sprites/maps/level_{levelnum}/normal.png")
+        img2.set_colorkey("white")
+        lscreen.blit(img2, (0, 0))
 
-        girth = player1.shape.radius * rod_girth * scale
+        goal = pygame.image.load("./sprites/level/flag.png")
+        goal = pygame.transform.scale(goal, (flag_size, flag_size))
+        lscreen.blit(goal, (gp[0] - goal.get_width() / 2, gp[1] - goal.get_height()))
+
+        girth = player1.shape.radius * rod_girth
         rod = pygame.image.load("./sprites/player/rod.png")
         rod = pygame.transform.scale(rod, (player1 + player2, girth))
-        rod = pygame.transform.rotate(rod, degrees(player1 - player2))
-        rod = pygame.transform.scale_by(rod, scale)
-        screen.blit(rod, (player1.body.position[0] * scale - rod.get_width() / 2, player1.body.position[1] * scale - rod.get_height() / 2))
+        rod = pygame.transform.rotate(rod, -degrees(player1 - player2))
+        lscreen.blit(rod, ((player1.body.position[0] + player2.body.position[0] - rod.get_width()) / 2, (player1.body.position[1] + player2.body.position[1] - rod.get_height()) / 2))
+        
+        sprite1 = level.player1.spriter(player2 - player1)
+        lscreen.blit(sprite1, (player1.body.position[0] - sprite1.get_width() / 2, player1.body.position[1] - sprite1.get_height() / 2))
+        
+        sprite2 = level.player2.spriter(player1 - player2)
+        lscreen.blit(sprite2, (player2.body.position[0] - sprite2.get_width() / 2, player2.body.position[1] - sprite2.get_height() / 2))
+        
 
-        goal = pygame.image.load("./sprites/level/goal.png")
-        goal = pygame.transform.scale(goal, (20, 20))
-        goal = pygame.transform.scale_by(goal, scale)
-        screen.blit(goal, (gp[0] * scale - goal.get_width() / 2, gp[1] * scale - goal.get_height() / 2))
-        
-        sprite1 = level.player1.sprite()
-        sprite1 = pygame.transform.scale_by(sprite1, scale)
-        screen.blit(sprite1, (player1.body.position[0] * scale - sprite1.get_width() / 2, player1.body.position[1] * scale - sprite1.get_height() / 2))
-        
-        sprite2 = level.player2.sprite()
-        sprite2 = pygame.transform.scale_by(sprite2, scale)
-        screen.blit(sprite2, (player2.body.position[0] * scale - sprite2.get_width() / 2, player2.body.position[1] * scale - sprite2.get_height() / 2))
-        
-        
+        lscreen = pygame.transform.scale_by(lscreen, scalef(*screen.get_size(), *dim))
+        screen.blit(lscreen, ((screen.get_width() - lscreen.get_width()) / 2, (screen.get_height() - lscreen.get_height()) / 2))
         pygame.display.flip()
 
     

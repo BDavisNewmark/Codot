@@ -72,10 +72,10 @@ class player():
                 break
         return can
 
-    def sprite(self) -> pygame.Surface:
-        image =  self.spriteH if self.holding else self.spriteN
-        image = pygame.transform.rotate(image, degrees(self.body.angle))
+    def spriter(self, modify: float) -> pygame.Surface:
+        image = self.sprite()
         image = pygame.transform.scale(image, (player_size * 2, player_size * 2))
+        image = pygame.transform.rotate(image, degrees(self.body.angle) + modify)
         return image
 
     def __add__(self, other: "player") -> float:
