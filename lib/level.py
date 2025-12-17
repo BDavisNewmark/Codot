@@ -17,7 +17,7 @@ pygame.display.set_caption("Codot")
 
 
 def init(level: int):
-    global running, space, clock, draw_options, player1, player2, hbody, dim, gp, levelnum
+    global running, space, clock, draw_options, player1, player2, hbody, dim, gp, levelnum, flag
     levelnum = level
     clock = pygame.time.Clock()
     running = True
@@ -37,6 +37,8 @@ def init(level: int):
     rod = pymunk.PinJoint(player1.body, player2.body, (0, 0), (0, 0))
     rod.error_bias = 0.1 ** 60
     space.add(rod)
+
+    flag = pymunk.BB.newForCircle(gp, flag_size / 2)
 
 
 

@@ -14,7 +14,7 @@ sticky_ground_type = True
 
 
 def init():
-    global screen, space, scale, dim, gp, levelnum, lscreen, draw_options, player1, player2
+    global screen, space, scale, dim, gp, levelnum, lscreen, draw_options, player1, player2, new
     screen = level.screen
     space = level.space
     scale = level.scale
@@ -25,50 +25,86 @@ def init():
     draw_options = level.draw_options
     player1 = level.player1
     player2 = level.player2
+    new = True
     
 
 scalef = lambda x1, y1, x2, y2 : min(x1 / x2, y1 / y2)
 
 
+
+loaded = []
+new = True
+
 def draw():
-    global lscreen
+    global lscreen, new, loaded
     if dev_mode:
         lscreen.fill("white")
         gspace = pymunk.Space()
         hbody = pymunk.Body(body_type = pymunk.Body.STATIC)
         gspace.add(hbody)
-        ground = map.load(levelnum, gspace, hbody, not sticky_ground_type, sticky_ground_type)
+        if new:
+            ground = map.load(levelnum, gspace, hbody, not sticky_ground_type, sticky_ground_type)
+            loaded.append(ground)
+        else:
+            ground = loaded[0]
         dog = pygame_util.DrawOptions(lscreen)
         gspace.debug_draw(dog)
         lscreen = pygame.transform.scale_by(lscreen, scalef(*screen.get_size(), *dim))
         screen.blit(lscreen, (0, 0))
         pygame.display.flip()
+        new = False
         
     else:
         lscreen = pygame.Surface(dim)
         lscreen.fill(behind)
         screen.fill(behind)
-        
-        bg = pygame.image.load("./sprites/level/bg.png")
-        bg = pygame.transform.scale(bg, lscreen.get_size())
+
+        if new:
+            bg = pygame.image.load("./sprites/level/bg.png")
+            bg = pygame.transform.scale(bg, lscreen.get_size())
+            shade = pygame.Surface(lscreen.get_size())
+            shade.fill("white")
+            shade.set_alpha(50)
+            bg.blit(shade, (0, 0))
+            loaded.append(bg)
+        else:
+            bg = loaded[0]
         lscreen.blit(bg, (0, 0))
         
-        img1 = pygame.image.load(f"./sprites/maps/level_{levelnum}/sticky.png")
-        img1.set_colorkey("white")
+        if new:
+            img1 = pygame.image.load(f"./sprites/maps/level_{levelnum}/sticky.png")
+            img1.set_colorkey("white")
+            loaded.append(img1)
+        else:
+            img1 = loaded[1]
         lscreen.blit(img1, (0, 0))
         
-        img2 = pygame.image.load(f"./sprites/maps/level_{levelnum}/normal.png")
-        img2.set_colorkey("white")
+        if new:
+            img2 = pygame.image.load(f"./sprites/maps/level_{levelnum}/normal.png")
+            img2.set_colorkey("white")
+            loaded.append(img2)
+        else:
+            img2 = loaded[2]
         lscreen.blit(img2, (0, 0))
 
-        goal = pygame.image.load("./sprites/level/flag.png")
-        goal = pygame.transform.scale(goal, (flag_size, flag_size))
+        if new:
+            goal = pygame.image.load("./sprites/level/flag.png")
+            goal = pygame.transform.scale(goal, (flag_size, flag_size))
+            loaded.append(goal)
+        else:
+            goal = loaded[3]
         lscreen.blit(goal, (gp[0] - goal.get_width() / 2, gp[1] - goal.get_height()))
 
-        girth = player1.shape.radius * rod_girth
-        rod = pygame.image.load("./sprites/player/rod.png")
-        rod = pygame.transform.scale(rod, (player1 + player2, girth))
-        rod = pygame.transform.rotate(rod, -degrees(player1 - player2))
+        if new:
+            girth = player1.shape.radius * rod_girth
+            loaded.append(girth)
+            rod = pygame.image.load("./sprites/player/rod.png")
+            loaded.append(rod)
+        else:
+            girth = loaded[4]
+            rod = loaded[5]
+            rod = pygame.transform.scale(rod, (player1 + player2, girth))
+            rod = pygame.transform.rotate(rod, -degrees(player1 - player2))
         lscreen.blit(rod, ((player1.body.position[0] + player2.body.position[0] - rod.get_width()) / 2, (player1.body.position[1] + player2.body.position[1] - rod.get_height()) / 2))
         
         sprite1 = level.player1.spriter(player2 - player1)
@@ -81,6 +117,7 @@ def draw():
         lscreen = pygame.transform.scale_by(lscreen, scalef(*screen.get_size(), *dim))
         screen.blit(lscreen, ((screen.get_width() - lscreen.get_width()) / 2, (screen.get_height() - lscreen.get_height()) / 2))
         pygame.display.flip()
+        new = False
 
     
     """mask = pygame.Surface(lscreen.get_size())
