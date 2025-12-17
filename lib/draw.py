@@ -25,7 +25,7 @@ def init():
     draw_options = level.draw_options
     player1 = level.player1
     player2 = level.player2
-    new = True
+    new = nax
     
 
 scalef = lambda x1, y1, x2, y2 : min(x1 / x2, y1 / y2)
@@ -33,10 +33,10 @@ scalef = lambda x1, y1, x2, y2 : min(x1 / x2, y1 / y2)
 
 
 loaded = []
-new = True
+new = nax
 
 def draw():
-    global lscreen, new, loaded
+    global lscreen, new, loaded, cover
     if dev_mode:
         lscreen.fill("white")
         gspace = pymunk.Space()
@@ -52,14 +52,14 @@ def draw():
         lscreen = pygame.transform.scale_by(lscreen, scalef(*screen.get_size(), *dim))
         screen.blit(lscreen, (0, 0))
         pygame.display.flip()
-        new = False
+        new -= 1
         
     else:
         lscreen = pygame.Surface(dim)
         lscreen.fill(behind)
         screen.fill(behind)
 
-        if new:
+        if new == nax:
             bg = pygame.image.load("./sprites/level/bg.png")
             bg = pygame.transform.scale(bg, lscreen.get_size())
             shade = pygame.Surface(lscreen.get_size())
@@ -71,7 +71,7 @@ def draw():
             bg = loaded[0]
         lscreen.blit(bg, (0, 0))
         
-        if new:
+        if new == nax:
             img1 = pygame.image.load(f"./sprites/maps/level_{levelnum}/sticky.png")
             img1.set_colorkey("white")
             loaded.append(img1)
@@ -79,7 +79,7 @@ def draw():
             img1 = loaded[1]
         lscreen.blit(img1, (0, 0))
         
-        if new:
+        if new == nax:
             img2 = pygame.image.load(f"./sprites/maps/level_{levelnum}/normal.png")
             img2.set_colorkey("white")
             loaded.append(img2)
@@ -87,7 +87,7 @@ def draw():
             img2 = loaded[2]
         lscreen.blit(img2, (0, 0))
 
-        if new:
+        if new == nax:
             goal = pygame.image.load("./sprites/level/flag.png")
             goal = pygame.transform.scale(goal, (flag_size, flag_size))
             loaded.append(goal)
@@ -95,7 +95,7 @@ def draw():
             goal = loaded[3]
         lscreen.blit(goal, (gp[0] - goal.get_width() / 2, gp[1] - goal.get_height()))
 
-        if new:
+        if new == nax:
             girth = player1.shape.radius * rod_girth
             loaded.append(girth)
             rod = pygame.image.load("./sprites/player/rod.png")
@@ -114,10 +114,17 @@ def draw():
         lscreen.blit(sprite2, (player2.body.position[0] - sprite2.get_width() / 2, player2.body.position[1] - sprite2.get_height() / 2))
         
 
+        if new == nax:
+            cover = pygame.Surface(lscreen.get_size())
+            cover.fill("black")
+        if new > 0:
+            cover.set_alpha(int(255 * new / nax)) # type: ignore
+            lscreen.blit(cover, (0, 0)) # type: ignore
+        
         lscreen = pygame.transform.scale_by(lscreen, scalef(*screen.get_size(), *dim))
         screen.blit(lscreen, ((screen.get_width() - lscreen.get_width()) / 2, (screen.get_height() - lscreen.get_height()) / 2))
         pygame.display.flip()
-        new = False
+        new -= 1
 
     
     """mask = pygame.Surface(lscreen.get_size())

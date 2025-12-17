@@ -10,3 +10,4 @@ circle_sides = 5
 rod_girth = .5
 flag_size = 100
 behind = (100, 100, 100)
+nax = 20
