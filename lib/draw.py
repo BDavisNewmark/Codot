@@ -1,5 +1,4 @@
 import pygame
-from pygame.transform import average_color
 import pymunk
 from pymunk import pygame_util
 import map
