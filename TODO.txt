@@ -1,3 +1,0 @@
-fix arc mapping
-add flag
-add players to draw
