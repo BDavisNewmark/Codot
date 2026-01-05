@@ -1,0 +1,5 @@
+ice
+in-level text
+level select (reusing player sprites)
+menu?
+sound effects / music
