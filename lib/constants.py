@@ -1,3 +1,6 @@
+import pygame
+pygame.font.init()
+
 player_mass = 10
 player_size = 40.5
 player_speed = 10
@@ -11,3 +14,6 @@ rod_girth = .5
 flag_size = 100
 behind = (100, 100, 100)
 nax = 20
+font = pygame.font.Font("./Iceberg/Iceberg-Regular.ttf", 100)
+fscale = .1
+fcolor = (0, 100, 0)

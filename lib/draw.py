@@ -87,11 +87,24 @@ def draw():
         lscreen.blit(img2, (0, 0))
 
         if new == nax:
+            texts = pygame.Surface(lscreen.get_size())
+            texts.fill("white")
+            texts.set_colorkey("white")
+            m = map.load(levelnum, space, level.hbody, False, False, True)
+            if len(m) > 4:
+                for x in m[4:]:
+                    texts.blit(x[0], (x[1], x[2]))
+            loaded.append(texts)
+        else:
+            texts = loaded[3]
+        lscreen.blit(texts, (0, 0))
+                
+        if new == nax:
             goal = pygame.image.load("./sprites/level/flag.png")
             goal = pygame.transform.scale(goal, (flag_size, flag_size))
             loaded.append(goal)
         else:
-            goal = loaded[3]
+            goal = loaded[4]
         lscreen.blit(goal, (gp[0] - goal.get_width() / 2, gp[1] - goal.get_height()))
 
         if new == nax:
@@ -99,9 +112,11 @@ def draw():
             loaded.append(girth)
             rod = pygame.image.load("./sprites/player/rod.png")
             loaded.append(rod)
+
+            
         else:
-            girth = loaded[4]
-            rod = loaded[5]
+            girth = loaded[5]
+            rod = loaded[6]
             rod = pygame.transform.scale(rod, (player1 + player2, girth))
             rod = pygame.transform.rotate(rod, -degrees(player1 - player2))
         lscreen.blit(rod, ((player1.body.position[0] + player2.body.position[0] - rod.get_width()) / 2, (player1.body.position[1] + player2.body.position[1] - rod.get_height()) / 2))

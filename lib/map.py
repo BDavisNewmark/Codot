@@ -3,14 +3,15 @@ from constants import *
 import csv
 from math import *
 from typing import *
+import pygame
 
 
-def load(level: int, space: pymunk.Space, sticky: pymunk.Body, g: bool = True, h: bool = True) -> Tuple[Tuple[int, int], Tuple[int, int], Tuple[int, int], Tuple[int, int]]:
-    output = None
+def load(level: int, space: pymunk.Space, sticky: pymunk.Body, g: bool = True, h: bool = True, t: bool = False) -> List[Tuple[int, int] | Tuple[pygame.surface.Surface, float, float]]:
+    output = []
     with open(f"./levels/level_{level}.csv") as c:
         reader = csv.reader(c)
         for i, row in enumerate(reader):
-            if i == 0: output = ((float(row[0]), float(row[1])), (float(row[2]), float(row[3])), (float(row[4]), float(row[5])), (float(row[6]), float(row[7])))
+            if i == 0: output = [(float(row[0]), float(row[1])), (float(row[2]), float(row[3])), (float(row[4]), float(row[5])), (float(row[6]), float(row[7]))]
             else:
                 if "g" in row[0]:
                     if g: b = space.static_body
@@ -40,6 +41,8 @@ def load(level: int, space: pymunk.Space, sticky: pymunk.Body, g: bool = True, h
                     x = pymunk.Poly(b, points) # type: ignore
                     x.friction = floor_friction
                     space.add(x)
-                elif row[0] == "t":
-                    
+                elif row[0] == "t" and t:
+                    x = font.render(row[4], False, fcolor)
+                    x = pygame.transform.scale_by(x, fscale * float(row[3]))
+                    output.append((x, float(row[1]), float(row[2])))
     return output # type: ignore

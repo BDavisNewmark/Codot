@@ -1,5 +1,3 @@
-ice
-in-level text
 level select (reusing player sprites)
 mouse
 menu?
