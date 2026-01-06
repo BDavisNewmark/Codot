@@ -3,3 +3,6 @@ hp, 0, 450, 0, 500, 1000, 500, 1000, 450
 gp, 450, 450, 550, 450, 550, 350, 450, 350, 450, 450
 gl, 0, 0, 0, 500, 1
 gl, 1000, 0, 1000, 500, 1
+t, 200, 125, 5, hold w/up arrow to stick
+t, 200, 175, 5, to sticky surfaces; press
+t, 200, 225, 5, </> or a/d to rotate while sticking

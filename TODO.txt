@@ -2,3 +2,4 @@ level select (reusing player sprites)
 mouse
 menu?
 sound effects / music
+playtesting
