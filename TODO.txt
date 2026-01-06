@@ -1,5 +1,6 @@
 ice
 in-level text
 level select (reusing player sprites)
+mouse
 menu?
 sound effects / music
