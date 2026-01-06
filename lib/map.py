@@ -40,4 +40,6 @@ def load(level: int, space: pymunk.Space, sticky: pymunk.Body, g: bool = True, h
                     x = pymunk.Poly(b, points) # type: ignore
                     x.friction = floor_friction
                     space.add(x)
+                elif row[0] == "t":
+                    
     return output # type: ignore
