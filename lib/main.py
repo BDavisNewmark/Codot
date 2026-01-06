@@ -1,8 +1,8 @@
 import pygame
 import level
 import draw
-import datetime
-from time import sleep
+# import datetime
+# from time import sleep
 
 
 """if datetime.datetime.now().month == 4 and datetime.datetime.now().day == 1:
@@ -21,7 +21,7 @@ from time import sleep
     exit()"""
 
 
-level.init(2)
+level.init(1)
 draw.init()
 
 while level.running:

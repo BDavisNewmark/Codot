@@ -8,7 +8,7 @@ from math import *
 
 
 dev_mode = False
-sticky_ground_type = True
+sticky_ground_type = False
 
 
 
@@ -71,7 +71,10 @@ def draw():
         lscreen.blit(bg, (0, 0))
         
         if new == nax:
-            img1 = pygame.image.load(f"./sprites/maps/level_{levelnum}/sticky.png")
+            try: img1 = pygame.image.load(f"./sprites/maps/level_{levelnum}/sticky.png")
+            except:
+                img1 = pygame.Surface((1, 1))
+                img1.fill("white")
             img1.set_colorkey("white")
             loaded.append(img1)
         else:
@@ -79,7 +82,10 @@ def draw():
         lscreen.blit(img1, (0, 0))
         
         if new == nax:
-            img2 = pygame.image.load(f"./sprites/maps/level_{levelnum}/normal.png")
+            try: img2 = pygame.image.load(f"./sprites/maps/level_{levelnum}/normal.png")
+            except:
+                img2 = pygame.Surface((1, 1))
+                img2.fill("white")
             img2.set_colorkey("white")
             loaded.append(img2)
         else:
