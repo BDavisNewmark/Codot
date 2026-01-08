@@ -17,3 +17,5 @@ nax = 20
 font = pygame.font.Font("./Iceberg/Iceberg-Regular.ttf", 100)
 fscale = .1
 fcolor = (0, 100, 0)
+lvlsel_size = 100
+lvlsel_grid = (5, 4)

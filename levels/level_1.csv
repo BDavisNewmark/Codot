@@ -2,3 +2,6 @@
 gp, 0, 450, 0, 500, 1000, 500, 1000, 450
 gl, 0, 0, -1, 500, 1
 gl, 1000, 0, 1000, 500, 1
+t, 250, 25, 5, press </> to move red
+t, 250, 75, 5, or a/d to move blue
+t, 250, 200, 5, cooperate to move quickly!

@@ -63,7 +63,7 @@ def draw():
             bg = pygame.transform.scale(bg, lscreen.get_size())
             shade = pygame.Surface(lscreen.get_size())
             shade.fill("white")
-            shade.set_alpha(50)
+            shade.set_alpha(69)
             bg.blit(shade, (0, 0))
             loaded.append(bg)
         else:
@@ -71,7 +71,7 @@ def draw():
         lscreen.blit(bg, (0, 0))
         
         if new == nax:
-            try: img1 = pygame.image.load(f"./sprites/maps/level_{levelnum}/sticky.png")
+            try: img1 = pygame.image.load(f"./sprites/maps/level_{levelnum}/normal.png")
             except:
                 img1 = pygame.Surface((1, 1))
                 img1.fill("white")
@@ -82,7 +82,7 @@ def draw():
         lscreen.blit(img1, (0, 0))
         
         if new == nax:
-            try: img2 = pygame.image.load(f"./sprites/maps/level_{levelnum}/normal.png")
+            try: img2 = pygame.image.load(f"./sprites/maps/level_{levelnum}/sticky.png")
             except:
                 img2 = pygame.Surface((1, 1))
                 img2.fill("white")

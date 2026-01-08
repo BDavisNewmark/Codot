@@ -21,7 +21,7 @@ import draw
     exit()"""
 
 
-level.init(1)
+level.init(4)
 draw.init()
 
 while level.running:
