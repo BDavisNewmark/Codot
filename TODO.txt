@@ -1,4 +1,3 @@
-save file (encryption?)
 level select (reusing player sprites)
 mouse
 menu?
