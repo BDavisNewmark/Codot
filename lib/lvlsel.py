@@ -2,8 +2,10 @@ import pygame
 from constants import *
 from typing import *
 from os import remove
+from classes import Cursor
 
 pygame.init()
+
 
 
 done = 0
@@ -31,4 +33,7 @@ def restart() -> None:
     done = 0
 
 
-def init(screen: pygame.Surface, )
+def init(window: pygame.Surface, scalar: float):
+    global screen, scale
+    screen = window
+    scale = scalar

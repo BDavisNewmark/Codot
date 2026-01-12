@@ -10,7 +10,7 @@ screen = pygame.display.set_mode((int(1280 * scale), int(720 * scale)))
 pygame.display.set_caption("Codot")
 
 
-level.init(screen, scale, 4)
+level.init(screen, scale, 3)
 draw.init()
 
 while level.running:

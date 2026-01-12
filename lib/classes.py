@@ -82,3 +82,22 @@ class player():
         ax, ay = self.body.position
         bx, by = other.body.position
         return sqrt((ax - bx) ** 2 + (ay - by) ** 2)
+
+
+
+class Cursor():
+    def __init__(self, sprites: str = "./sprites/gui/cursor/", pos: Tuple[float, float] = pygame.mouse.get_pos(), size: Tuple[int, int] = (10, 10), angle: float = 135, point: Tuple[float, float] = (1/2, 1/2), mode: int = 0):
+        self.pos = pos
+        self.size = size
+        self.angle = angle
+        self.mode = mode
+
+        self.sprites = [
+            pygame.image.load(f"{sprites}idle.png"),
+            pygame.image.load(f"{sprites}hover.png"),
+            pygame.image.load(f"{sprites}click.png")
+        ]
+
+        pointing = [point[0] * size[0], point[1] * size[1]]
+        pointing = [pointing[0] * cos(radians(angle)) - pointing[1] * sin(radians(angle)), pointing[0] * sin(radians(angle)) + pointing[1] * cos(radians(angle))]
+        
