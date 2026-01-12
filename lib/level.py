@@ -10,14 +10,10 @@ pygame.init()
 
 
 
-desksize = pygame.display.get_desktop_sizes()[0]
-scale = min(1, desksize[0] / 1280, desksize[1] / 720)
-screen = pygame.display.set_mode((int(1280 * scale), int(720 * scale)))
-pygame.display.set_caption("Codot")
-
-
-def init(level: int):
-    global running, space, clock, draw_options, player1, player2, hbody, dim, gp, levelnum, flag
+def init(window: pygame.Surface, scalar: float, level: int):
+    global screen, scale, running, space, clock, draw_options, player1, player2, hbody, dim, gp, levelnum, flag
+    screen = window
+    scale = scalar
     levelnum = level
     clock = pygame.time.Clock()
     running = True
