@@ -98,6 +98,17 @@ class Cursor():
             pygame.image.load(f"{sprites}click.png")
         ]
 
-        pointing = [point[0] * size[0], point[1] * size[1]]
-        pointing = [pointing[0] * cos(radians(angle)) - pointing[1] * sin(radians(angle)), pointing[0] * sin(radians(angle)) + pointing[1] * cos(radians(angle))]
-        
+        self.pointing = (
+            (point[0]-(size[0]/2))*cos(radians(360-angle)) -
+            (point[1]-(size[1]/2))*sin(radians(360-angle)) +
+            max(abs((size[0]*cos(radians(360-angle))/2) -
+            (size[1]*sin(radians(360-angle))/2)),
+            abs((size[0]*cos(radians(360-angle))/2) +
+            (size[1]*sin(radians(360-angle))/2))),
+            (point[0]-(size[0]/2))*sin(radians(360-angle)) +
+            (point[1]-(size[1]/2))*cos(radians(360-angle)) +
+            max(abs((size[0]*sin(radians(360-angle))/2) -
+            (size[1]*cos(radians(360-angle))/2)),
+            abs((size[0]*sin(radians(360-angle))/2) +
+            (size[1]*cos(radians(360-angle))/2)))
+        )
