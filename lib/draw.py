@@ -8,7 +8,7 @@ from math import *
 
 
 dev_mode = False
-sticky_ground_type = False
+sticky_ground_type = True
 
 
 
