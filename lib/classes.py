@@ -86,17 +86,21 @@ class player():
 
 
 class Cursor():
-    def __init__(self, sprites: str = "./sprites/gui/cursor/", pos: Tuple[float, float] = pygame.mouse.get_pos(), size: Tuple[int, int] = (10, 10), angle: float = 135, point: Tuple[float, float] = (1/2, 1/2), mode: int = 0):
-        self.pos = pos
+    def __init__(self, sprites: str = "./sprites/gui/cursor/", size: Tuple[int, int] = (10, 10), angle: float = 135, point: Tuple[float, float] = (1/2, 1/2)):
         self.size = size
         self.angle = angle
-        self.mode = mode
 
         self.sprites = [
             pygame.image.load(f"{sprites}idle.png"),
             pygame.image.load(f"{sprites}hover.png"),
             pygame.image.load(f"{sprites}click.png")
         ]
+
+        for i in range(3):
+            x = pygame.transform.scale(self.sprites[i], size)
+            x = pygame.transform.rotate(x, angle)
+            self.sprites[i] = x
+            
 
         self.pointing = (
             (point[0]-(size[0]/2))*cos(radians(360-angle)) -
@@ -112,3 +116,31 @@ class Cursor():
             abs((size[0]*sin(radians(360-angle))/2) +
             (size[1]*cos(radians(360-angle))/2)))
         )
+
+
+    def hover(self, scale: float, *objects: Callable[[Tuple[int, int]], bool]) -> int:
+        pos = tuple(x / scale for x in pygame.mouse.get_pos())
+        out = -1
+        for i, x in enumerate(objects):
+            if x(pos):
+                out = i
+                break
+        return out
+
+
+    def draw(self, dim: Tuple[int, int], scale: float, *objects: Callable[[Tuple[int, int]], bool])) -> Tuple[pygame.Surface, int]:
+        hovered = self.hover(scale, *objects)
+
+        if pygame.mouse.get_pressed()[0]:  sprite = self.sprites[2]
+        elif hovered == -1: sprite = self.sprites[0]
+        else: sprite = self.sprites[1]
+
+        pos = tuple(x / scale for x in pygame.mouse.get_pos())
+        pos = (pos[0] - self.pointing[0], pos[1] - self.pointing[1])
+
+        overlay = pygame.Surface(dim)
+        overlay.fill("white")
+        overlay.blit(sprite, pos)
+        overlay.set_colorkey("white")
+        
+        return (overlay, hovered)
