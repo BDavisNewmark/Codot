@@ -8,6 +8,7 @@ pygame.init()
 
 
 
+devmode = False
 done = 0
 
 
@@ -37,3 +38,8 @@ def init(window: pygame.Surface, scalar: float):
     global screen, scale
     screen = window
     scale = scalar
+
+
+def run() -> int:
+    mouse = Cursor(point = (1/2, 1))
+    ...

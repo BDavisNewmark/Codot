@@ -59,7 +59,7 @@ def draw():
         screen.fill(behind)
 
         if new == nax:
-            bg = pygame.image.load("./sprites/level/bg.png")
+            bg = pygame.image.load("./sprites/level/bgb.png")
             bg = pygame.transform.scale(bg, lscreen.get_size())
             shade = pygame.Surface(lscreen.get_size())
             shade.fill("white")

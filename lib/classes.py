@@ -86,7 +86,7 @@ class player():
 
 
 class Cursor():
-    def __init__(self, sprites: str = "./sprites/gui/cursor/", size: Tuple[int, int] = (10, 10), angle: float = 135, point: Tuple[float, float] = (1/2, 1/2)):
+    def __init__(self, sprites: str = "./sprites/gui/cursor/", size: Tuple[int, int] = mouse_size, angle: float = 135, point: Tuple[float, float] = (1/2, 1/2)):
         self.size = size
         self.angle = angle
 
@@ -128,7 +128,7 @@ class Cursor():
         return out
 
 
-    def draw(self, dim: Tuple[int, int], scale: float, *objects: Callable[[Tuple[int, int]], bool])) -> Tuple[pygame.Surface, int]:
+    def draw(self, dim: Tuple[int, int], scale: float, *objects: Callable[[Tuple[int, int]], bool]) -> Tuple[pygame.Surface, int]:
         hovered = self.hover(scale, *objects)
 
         if pygame.mouse.get_pressed()[0]:  sprite = self.sprites[2]

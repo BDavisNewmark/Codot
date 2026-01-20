@@ -1,9 +1,8 @@
 1000, 500, 50, 250, 300, 250, 950, 450
 gp, 0, 450, 0, 500, 1000, 450, 1000, 500, 0, 450
 hp, 402.5, 450, 602.5, 450, 602.5, 0, 402.5, 0, 402.5, 450
-t, 0, 0, 4, there are no ceilings 
-t, 0, 40, 4, to most levels you
-t, 0, 80, 4, can use this as you
-t, 0, 120, 4, will
+t, 0, 0, 4, There are no ceilings 
+t, 0, 40, 4, to most levels.
+t, 0, 80, 4, Use this as you will.
 gl, 0, 0, 0, 500, 1
 gl, 1000, 0, 1000, 500, 1

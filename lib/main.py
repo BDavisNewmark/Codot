@@ -1,6 +1,7 @@
 import pygame
 import level
 import draw
+import lvlsel
 
 
 
@@ -13,6 +14,7 @@ pygame.mouse.set_visible(False)
 
 level.init(screen, scale, 4)
 draw.init()
+lvlsel.init(screen, scale)
 
 while level.running:
     level.step()
