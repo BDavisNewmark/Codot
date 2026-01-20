@@ -59,8 +59,8 @@ def draw():
     else:
         lscreen = pygame.Surface(dim)
         screen.fill(behind)
-        if not invis:
-            lscreen.fill(behind)
+        if invis: lscreen.fill("white")
+        else: lscreen.fill(behind)
 
         if new == nax:
             bg = pygame.image.load("./sprites/level/bgb.png")
@@ -109,13 +109,6 @@ def draw():
             if len(m) > 4:
                 for x in m[4:]:
                     texts.blit(x[0], (x[1], x[2]))
-            if invis:
-                texts = pygame.transform.laplacian(texts)
-                txts = pygame.Surface(texts.get_size())
-                txts.fill("white")
-                txts.blit(texts, (0, 0), special_flags = pygame.BLEND_RGB_SUB)
-                texts = txts
-                texts.set_colorkey("white")
             loaded.append(texts)
         else:
             texts = loaded[3]
