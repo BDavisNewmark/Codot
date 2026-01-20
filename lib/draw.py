@@ -12,8 +12,6 @@ import datetime
 dev_mode = False
 sticky_ground_type = True
 
-outline = False
-
 
 
 def init():
@@ -60,8 +58,9 @@ def draw():
         
     else:
         lscreen = pygame.Surface(dim)
-        lscreen.fill(behind)
-        screen.fill(behind)
+        if not invis:
+            lscreen.fill(behind)
+            screen.fill(behind)
 
         if new == nax:
             bg = pygame.image.load("./sprites/level/bgb.png")
@@ -73,12 +72,13 @@ def draw():
             loaded.append(bg)
         else:
             bg = loaded[0]
+        if invis: bg = pygame.transform.laplacian(bg)
         lscreen.blit(bg, (0, 0))
         
         if new == nax:
             try:
                 img1 = pygame.image.load(f"./sprites/maps/level_{levelnum}/normal.png")
-                if invis or outline: img1 = pygame.transform.laplacian(img1)
+                if invis: img1 = pygame.transform.laplacian(img1)
             except:
                 img1 = pygame.Surface((1, 1))
                 img1.fill("white")
@@ -91,7 +91,7 @@ def draw():
         if new == nax:
             try:
                 img2 = pygame.image.load(f"./sprites/maps/level_{levelnum}/sticky.png")
-                if invis or outline: img2 = pygame.transform.laplacian(img2)
+                if invis: img2 = pygame.transform.laplacian(img2)
             except:
                 img2 = pygame.Surface((1, 1))
                 img2.fill("white")
@@ -109,7 +109,13 @@ def draw():
             if len(m) > 4:
                 for x in m[4:]:
                     texts.blit(x[0], (x[1], x[2]))
-            if invis: texts = pygame.transform.laplacian(texts)
+            if invis:
+                texts = pygame.transform.laplacian(texts)
+                txts = pygame.Surface(texts.get_size())
+                txts.fill("white")
+                txts.blit(texts, (0, 0), special_flags = pygame.BLEND_RGB_SUB)
+                texts = txts
+                texts.set_colorkey("white")
             loaded.append(texts)
         else:
             texts = loaded[3]
@@ -128,16 +134,15 @@ def draw():
             girth = player1.shape.radius * rod_girth
             loaded.append(girth)
             rod = pygame.image.load("./sprites/player/rod.png")
-            if invis: rod = pygame.transform.laplacian(rod)
             loaded.append(rod)
-
-            
         else:
             girth = loaded[5]
             rod = loaded[6]
             rod = pygame.transform.scale(rod, (player1 + player2, girth))
             rod = pygame.transform.rotate(rod, -degrees(player1 - player2))
+        if invis: rod = pygame.transform.laplacian(rod)
         lscreen.blit(rod, ((player1.body.position[0] + player2.body.position[0] - rod.get_width()) / 2, (player1.body.position[1] + player2.body.position[1] - rod.get_height()) / 2))
+        
         
         sprite1 = level.player1.spriter(player2 - player1)
         if invis: sprite1 = pygame.transform.laplacian(sprite1)
