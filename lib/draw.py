@@ -12,7 +12,7 @@ import datetime
 dev_mode = False
 sticky_ground_type = True
 
-outline = True
+outline = False
 
 
 
