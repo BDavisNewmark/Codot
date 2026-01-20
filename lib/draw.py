@@ -5,15 +5,19 @@ import map
 import level
 from constants import *
 from math import *
+import random
+import datetime
 
 
 dev_mode = False
 sticky_ground_type = True
 
+outline = True
+
 
 
 def init():
-    global screen, space, scale, dim, gp, levelnum, lscreen, draw_options, player1, player2, new
+    global screen, space, scale, dim, gp, levelnum, lscreen, draw_options, player1, player2, new, invis
     screen = level.screen
     space = level.space
     scale = level.scale
@@ -25,6 +29,7 @@ def init():
     player1 = level.player1
     player2 = level.player2
     new = nax
+    invis = (not random.randint(0, 100)) or (datetime.datetime.now().month == 4 and datetime.datetime.now().day == 1)
     
 
 scalef = lambda x1, y1, x2, y2 : min(x1 / x2, y1 / y2)
@@ -71,7 +76,9 @@ def draw():
         lscreen.blit(bg, (0, 0))
         
         if new == nax:
-            try: img1 = pygame.image.load(f"./sprites/maps/level_{levelnum}/normal.png")
+            try:
+                img1 = pygame.image.load(f"./sprites/maps/level_{levelnum}/normal.png")
+                if invis or outline: img1 = pygame.transform.laplacian(img1)
             except:
                 img1 = pygame.Surface((1, 1))
                 img1.fill("white")
@@ -82,7 +89,9 @@ def draw():
         lscreen.blit(img1, (0, 0))
         
         if new == nax:
-            try: img2 = pygame.image.load(f"./sprites/maps/level_{levelnum}/sticky.png")
+            try:
+                img2 = pygame.image.load(f"./sprites/maps/level_{levelnum}/sticky.png")
+                if invis or outline: img2 = pygame.transform.laplacian(img2)
             except:
                 img2 = pygame.Surface((1, 1))
                 img2.fill("white")
@@ -100,6 +109,7 @@ def draw():
             if len(m) > 4:
                 for x in m[4:]:
                     texts.blit(x[0], (x[1], x[2]))
+            if invis: texts = pygame.transform.laplacian(texts)
             loaded.append(texts)
         else:
             texts = loaded[3]
@@ -107,6 +117,7 @@ def draw():
                 
         if new == nax:
             goal = pygame.image.load("./sprites/level/flag.png")
+            if invis: goal = pygame.transform.laplacian(goal)
             goal = pygame.transform.scale(goal, (flag_size, flag_size))
             loaded.append(goal)
         else:
@@ -117,6 +128,7 @@ def draw():
             girth = player1.shape.radius * rod_girth
             loaded.append(girth)
             rod = pygame.image.load("./sprites/player/rod.png")
+            if invis: rod = pygame.transform.laplacian(rod)
             loaded.append(rod)
 
             
@@ -128,9 +140,11 @@ def draw():
         lscreen.blit(rod, ((player1.body.position[0] + player2.body.position[0] - rod.get_width()) / 2, (player1.body.position[1] + player2.body.position[1] - rod.get_height()) / 2))
         
         sprite1 = level.player1.spriter(player2 - player1)
+        if invis: sprite1 = pygame.transform.laplacian(sprite1)
         lscreen.blit(sprite1, (player1.body.position[0] - sprite1.get_width() / 2, player1.body.position[1] - sprite1.get_height() / 2))
         
         sprite2 = level.player2.spriter(player1 - player2)
+        if invis: sprite2 = pygame.transform.laplacian(sprite2)
         lscreen.blit(sprite2, (player2.body.position[0] - sprite2.get_width() / 2, player2.body.position[1] - sprite2.get_height() / 2))
         
 
