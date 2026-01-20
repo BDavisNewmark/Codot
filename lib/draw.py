@@ -58,9 +58,9 @@ def draw():
         
     else:
         lscreen = pygame.Surface(dim)
+        screen.fill(behind)
         if not invis:
             lscreen.fill(behind)
-            screen.fill(behind)
 
         if new == nax:
             bg = pygame.image.load("./sprites/level/bgb.png")
