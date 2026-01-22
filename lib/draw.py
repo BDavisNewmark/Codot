@@ -27,7 +27,7 @@ def init():
     player1 = level.player1
     player2 = level.player2
     new = nax
-    invis = (not random.randint(0, 100)) or (datetime.datetime.now().month == 4 and datetime.datetime.now().day == 1)
+    invis = (not random.randint(0, 1000)) or (datetime.datetime.now().month == 4 and datetime.datetime.now().day == 1)
     
 
 scalef = lambda x1, y1, x2, y2 : min(x1 / x2, y1 / y2)
@@ -112,7 +112,7 @@ def draw():
             loaded.append(texts)
         else:
             texts = loaded[3]
-        lscreen.blit(texts, (0, 0))
+        if not invis: lscreen.blit(texts, (0, 0))
                 
         if new == nax:
             goal = pygame.image.load("./sprites/level/flag.png")

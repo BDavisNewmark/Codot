@@ -21,3 +21,4 @@ lvlsel_size = 100
 lvlsel_grid = (5, 4)
 lvlsel_gap = 20
 mouse_size = (10, 10)
+wax = 10
