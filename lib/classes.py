@@ -33,12 +33,14 @@ class player():
         if self.holding != b:
             if b:
                 self.holding = True
+                
                 self.hpointa = pymunk.Body(body_type = pymunk.Body.STATIC)
                 self.hpointa.position = self.body.position + (10, 10)
                 self.hpointa.shape = pymunk.Circle(self.hpointa, 1)
                 self.hpointa.shape.collision_type = 0
                 self.hjointa = pymunk.PinJoint(self.body, self.hpointa, (0, 0), (0, 0))
                 self.hjointa.collide_bodies = False
+                self.hjointa.max_force = nail_strength
                 
                 self.hpointb = pymunk.Body(body_type = pymunk.Body.STATIC)
                 self.hpointb.position = self.body.position + (-10, 10)
@@ -46,6 +48,7 @@ class player():
                 self.hpointb.shape.collision_type = 0
                 self.hjointb = pymunk.PinJoint(self.body, self.hpointb, (0, 0), (0, 0))
                 self.hjointb.collide_bodies = False
+                self.hjointb.max_force = nail_strength
                 
                 return (self.hpointa, self.hpointa.shape, self.hjointa, self.hpointb, self.hpointb.shape, self.hjointb)
                 

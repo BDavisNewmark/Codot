@@ -22,3 +22,4 @@ lvlsel_grid = (5, 4)
 lvlsel_gap = 20
 mouse_size = (10, 10)
 wax = 10
+nail_strength = 100000000
