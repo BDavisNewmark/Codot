@@ -63,14 +63,14 @@ def step():
             space.remove(*j)
             for x in j: del x
     if player1.holding:
-        player1.move(0)
+        player1.move(0, player2)
         if m != 0:
             mangle = player1 - player2
             mangle += m * pi / 2
             mangle %= 2 * pi
             force = (cos(mangle) * player_push, sin(mangle) * player_push)
             player2.body.apply_force_at_world_point(force, player2.body.position)
-    else: player1.move(m)
+    else: player1.move(m, player2)
 
     n = 0
     if keys[pygame.K_LEFT]: n += 1
@@ -84,14 +84,14 @@ def step():
             space.remove(*j)
             for x in j: del x
     if player2.holding:
-        player2.move(0)
+        player2.move(0, player1)
         if n != 0:
             nangle = player2 - player1
             nangle += n * pi / 2
             nangle %= 2 * pi
             force = (cos(nangle) * player_push, sin(nangle) * player_push)
             player1.body.apply_force_at_world_point(force, player1.body.position)
-    else: player2.move(n)
+    else: player2.move(n, player1)
     
 
     # space.debug_draw(draw_options)

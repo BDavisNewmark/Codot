@@ -1,5 +1,8 @@
-mouse
-level select (reusing player sprites)
-menu?
-sound effects / music
-playtesting
+GLITCHES:
+- Consereving momentum (from collision?)
+
+- mouse
+- level select (reusing player sprites)
+- menu?
+- sound effects / music
+- playtesting

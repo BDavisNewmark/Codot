@@ -29,6 +29,7 @@ class player():
         self.motor = pymunk.SimpleMotor(self.center, self.body, 0)
         self.motor.collide_bodies = False
 
+    
     def hold(self, b: bool):
         if self.holding != b:
             if b:
@@ -56,9 +57,12 @@ class player():
                 self.holding = False
                 return (self.hjointa, self.hpointa.shape, self.hpointa, self.hjointb, self.hpointb.shape, self.hpointb)
 
-    def move(self, direction: int):
-        self.motor.rate = player_speed if direction == 1 else -player_speed if direction == -1 else 0
-
+    
+    def move(self, direction: int, other: "player"):
+        if self.holding and other.holding: self.motor.rate = 0
+        else: self.motor.rate = player_speed if direction == 1 else -player_speed if direction == -1 else 0
+            
+            
     def __sub__(self, other: "player") -> float:
         ax, ay = self.body.position
         bx, by = other.body.position
@@ -67,6 +71,7 @@ class player():
         cx, cy = cx / r, cy / r
         return acos(cx) if cy > 0 else 2 * pi - acos(cx)
 
+    
     def holdable(self, sticky: pymunk.Body, space: pymunk.Space) -> bool:
         can = False
         for x in space.shape_query(self.shape):
@@ -75,12 +80,14 @@ class player():
                 break
         return can
 
+    
     def spriter(self, modify: float) -> pygame.Surface:
         image = self.sprite()
         image = pygame.transform.scale(image, (player_size * 2, player_size * 2))
         image = pygame.transform.rotate(image, -degrees(self.body.angle) - modify)
         return image
 
+    
     def __add__(self, other: "player") -> float:
         ax, ay = self.body.position
         bx, by = other.body.position
@@ -103,7 +110,6 @@ class Cursor():
             x = pygame.transform.scale(self.sprites[i], size)
             x = pygame.transform.rotate(x, angle)
             self.sprites[i] = x
-            
 
         self.pointing = (
             (point[0]-(size[0]/2))*cos(radians(360-angle)) -
