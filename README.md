@@ -1,6 +1,6 @@
 # Codot
 
-A teamwork platformer where you play with 2 circles attached a fixed position away from each other, using a combination of spinning and movement to reach goals, with increasing levels of difficulty.
+A teamwork platformer where you play with two circles attached a fixed position away from each other, using a combination of spinning and movement to reach goals, with increasing levels of difficulty.
 
 ## Controls
 
@@ -9,10 +9,6 @@ A teamwork platformer where you play with 2 circles attached a fixed position aw
 | `A` / `←` | Roll counter-clockwise. Move rod counterclockwise while stuck. |
 | `D` / `→` | Roll clockwise. Move rod clockwise while stuck. |
 | `W` / `↑` | Stick to a sticky surface. |
-
-## Hints
-
-***{Coming Soon...}***
 
 ## Credits
 * **Bach Davis** ﻿ ﻿ ﻿ ﻿ - ﻿ ﻿ ﻿ ﻿ *Code, Music*
