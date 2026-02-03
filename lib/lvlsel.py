@@ -42,4 +42,4 @@ def init(window: pygame.Surface, scalar: float):
 
 def run() -> int:
     mouse = Cursor(point = (1/2, 1))
-    ...
+    
