@@ -137,10 +137,10 @@ class Cursor():
         return out
 
 
-    def draw(self, dim: Tuple[int, int], scale: float, *objects: Callable[[Tuple[int, int]], bool]) -> Tuple[pygame.Surface, int]:
+    def draw(self, dim: Tuple[int, int], scale: float, *objects: Callable[[Tuple[int, int]], bool]) -> pygame.Surface:
         hovered = self.hover(scale, *objects)
 
-        if pygame.mouse.get_pressed()[0]:  sprite = self.sprites[2]
+        if pygame.mouse.get_pressed()[0]: sprite = self.sprites[2]
         elif hovered == -1: sprite = self.sprites[0]
         else: sprite = self.sprites[1]
 
@@ -152,4 +152,4 @@ class Cursor():
         overlay.blit(sprite, pos)
         overlay.set_colorkey("white")
         
-        return (overlay, hovered)
+        return overlay

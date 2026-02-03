@@ -12,7 +12,7 @@ pygame.display.set_caption("Codot")
 pygame.mouse.set_visible(False)
 
 
-level.init(screen, scale, 4)
+level.init(screen, scale, 5)
 draw.init()
 lvlsel.init(screen, scale)
 
@@ -20,3 +20,7 @@ while level.running:
     level.step()
     draw.draw()
     pygame.display.flip()
+
+"""while True:
+    lvlsel.run()
+    pygame.display.flip()"""

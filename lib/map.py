@@ -20,7 +20,7 @@ def load(level: int, space: pymunk.Space, sticky: pymunk.Body, icy: pymunk.Body,
                 elif "h" in row[0]:
                     if h: b = sticky
                     else: continue
-                elif "i" in row[0]
+                elif "i" in row[0]:
                     if s: b = icy; fric = False
                     else: continue
                 if "l" in row[0]:
