@@ -1,4 +1,3 @@
 Bouncy objects
 conveyor belts
 double flags
-ice

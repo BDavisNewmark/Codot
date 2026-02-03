@@ -102,6 +102,19 @@ def draw():
         lscreen.blit(img2, (0, 0))
 
         if new == nax:
+            try:
+                img3 = pygame.image.load(f"./sprites/maps/level_{levelnum}/icy.png")
+                if invis: img3 = pygame.transform.laplacian(img3)
+            except:
+                img3 = pygame.Surface((1, 1))
+                img3.fill("white")
+            img3.set_colorkey("white")
+            loaded.append(img3)
+        else:
+            img3 = loaded[2]
+        lscreen.blit(img3, (0, 0))
+
+        if new == nax:
             texts = pygame.Surface(lscreen.get_size())
             texts.fill("white")
             texts.set_colorkey("white")
@@ -111,7 +124,7 @@ def draw():
                     texts.blit(x[0], (x[1], x[2]))
             loaded.append(texts)
         else:
-            texts = loaded[3]
+            texts = loaded[4]
         if not invis: lscreen.blit(texts, (0, 0))
                 
         if new == nax:
@@ -120,7 +133,7 @@ def draw():
             goal = pygame.transform.scale(goal, (flag_size, flag_size))
             loaded.append(goal)
         else:
-            goal = loaded[4]
+            goal = loaded[5]
         lscreen.blit(goal, (gp[0] - goal.get_width() / 2, gp[1] - goal.get_height()))
 
         if new == nax:
@@ -129,8 +142,8 @@ def draw():
             rod = pygame.image.load("./sprites/player/rod.png")
             loaded.append(rod)
         else:
-            girth = loaded[5]
-            rod = loaded[6]
+            girth = loaded[6]
+            rod = loaded[7]
             rod = pygame.transform.scale(rod, (player1 + player2, girth))
             rod = pygame.transform.rotate(rod, -degrees(player1 - player2))
         if invis: rod = pygame.transform.laplacian(rod)

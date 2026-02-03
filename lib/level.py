@@ -11,7 +11,7 @@ pygame.init()
 
 
 def init(window: pygame.Surface, scalar: float, level: int):
-    global screen, scale, running, space, clock, draw_options, player1, player2, hbody, dim, gp, levelnum, flag
+    global screen, scale, running, space, clock, draw_options, player1, player2, hbody, ibody, dim, gp, levelnum, flag
     screen = window
     scale = scalar
     levelnum = level
@@ -21,8 +21,9 @@ def init(window: pygame.Surface, scalar: float, level: int):
     space.gravity = 0, gravity
     draw_options = pygame_util.DrawOptions(screen)
     hbody = pymunk.Body(body_type = pymunk.Body.STATIC)
-    space.add(hbody)
-    dim, p1p, p2p, gp = map.load(level, space, hbody) # type: ignore
+    ibody = pymunk.Body(body_type = pymunk.Body.STATIC)
+    space.add(hbody, ibody)
+    dim, p1p, p2p, gp = map.load(level, space, hbody, ibody) # type: ignore
 
     player1 = player(p1p[0], p1p[1], ("blue_player.png", "blue_player_hold.png"))
     space.add(player1.body, player1.shape, player1.center, player1.motor)
