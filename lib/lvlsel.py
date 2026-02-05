@@ -4,6 +4,7 @@ from typing import *
 from os import remove
 from classes import Cursor
 import level
+from time import sleep
 
 pygame.init()
 
@@ -46,9 +47,9 @@ def init(window: pygame.Surface, scalar: float):
         except: break
         else: exist += 1
 
-    mouse = Cursor(point = (1/2, 1))
+    mouse = Cursor(point = (1/2, 1), size = mouse_size)
 
-    place = lambda n : ((n % lvlsel_grid[0]) * (lvlsel_size + lvlsel_gap) + (screen.get_width() - lvlsel_size * lvlsel_grid[0] - lvlsel_gap * (lvlsel_grid[0] - 1)) // 2, (n // lvlsel_grid[1]) * (lvlsel_size + lvlsel_gap) + (screen.get_height() - lvlsel_size * lvlsel_grid[1] - lvlsel_gap * (lvlsel_grid[1] - 1)) // 2)
+    place = lambda n : ((n % lvlsel_grid[0]) * (lvlsel_size + lvlsel_gap) + (screen.get_width() - lvlsel_size * lvlsel_grid[0] - lvlsel_gap * (lvlsel_grid[0] - 1)) // 2, (n // lvlsel_grid[0]) * (lvlsel_size + lvlsel_gap) + (screen.get_height() - lvlsel_size * lvlsel_grid[1] - lvlsel_gap * (lvlsel_grid[1] - 1)) // 2)
     
     def button(n: int) -> Callable[[Tuple[int, int]], bool]:
         return lambda pos : (pos[0] - place(n)[0] - lvlsel_size / 2) ** 2 + (pos[1] - place(n)[1] - lvlsel_size / 2) ** 2 < (lvlsel_size / 2) ** 2
@@ -67,17 +68,19 @@ def run() -> int:
     shade.fill("white")
     shade.set_alpha(69)
     bg.blit(shade, (0, 0))
-    bg.blit(lscreen, (0, 0))
+    lscreen.blit(bg, (0, 0))
     
     hovered = mouse.hover(scale, *buttons)
+
+    pygame.event.get()
 
     for i in range(exist):
         sprite = pygame.image.load(f"./sprites/player/{'blue' if i <= done else 'red'}_player{'_hold' if i == hovered else ''}.png")
         sprite = pygame.transform.scale(sprite, (lvlsel_size, lvlsel_size))
-        sprite.blit(lscreen, place(i))
+        lscreen.blit(sprite, place(i))
 
-    lscreen.blit(screen, (0, 0))
     mice = mouse.draw(lscreen.get_size(), scale, *buttons)
-    mice.blit(lscreen, (0, 0))
-    
+    lscreen.blit(mice, (0, 0))
+
+    screen.blit(lscreen, (0, 0))
     return 0
