@@ -16,11 +16,15 @@ level.init(screen, scale, 5)
 draw.init()
 lvlsel.init(screen, scale)
 
-while level.running:
-    level.step()
-    draw.draw()
-    pygame.display.flip()
+mode = 1
 
-"""while True:
-    lvlsel.run()
-    pygame.display.flip()"""
+if mode == 0:
+    while level.running:
+        level.step()
+        draw.draw()
+        pygame.display.flip()
+
+elif mode == 1:
+    while True:
+        lvlsel.run()
+        pygame.display.flip()
