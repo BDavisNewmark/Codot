@@ -10,7 +10,10 @@ import datetime
 
 
 dev_mode = False
-sticky_ground_type = True
+ground_type = 0
+# 0 - normal
+# 1 - sticky
+# 2 - icy
 
 
 
@@ -43,9 +46,10 @@ def draw():
         lscreen.fill("white")
         gspace = pymunk.Space()
         hbody = pymunk.Body(body_type = pymunk.Body.STATIC)
-        gspace.add(hbody)
+        ibody = pymunk.Body(body_type = pymunk.Body.STATIC)
+        gspace.add(hbody, ibody)
         if new:
-            ground = map.load(levelnum, gspace, hbody, not sticky_ground_type, sticky_ground_type)
+            ground = map.load(levelnum, gspace, hbody, ibody, ground_type == 0, ground_type == 1, ground_type == 2)
             loaded.append(ground)
         else:
             ground = loaded[0]
@@ -118,7 +122,7 @@ def draw():
             texts = pygame.Surface(lscreen.get_size())
             texts.fill("white")
             texts.set_colorkey("white")
-            m = map.load(levelnum, space, level.hbody, False, False, True)
+            m = map.load(levelnum, space, level.hbody, level.ibody, False, False, False, True)
             if len(m) > 4:
                 for x in m[4:]:
                     texts.blit(x[0], (x[1], x[2]))
