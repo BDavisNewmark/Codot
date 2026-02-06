@@ -111,7 +111,7 @@ class Cursor():
             x = pygame.transform.rotate(x, angle)
             self.sprites[i] = x
 
-        self.pointing = (
+        """self.pointing = (
             (point[0]-(size[0]/2))*cos(radians(360-angle)) -
             (point[1]-(size[1]/2))*sin(radians(360-angle)) +
             max(abs((size[0]*cos(radians(360-angle))/2) -
@@ -124,11 +124,18 @@ class Cursor():
             (size[1]*cos(radians(360-angle))/2)),
             abs((size[0]*sin(radians(360-angle))/2) -
             (size[1]*cos(radians(360-angle))/2)))
-        )
+        )"""
+
+        r = sqrt((size[0] / 2) ** 2 + (size[1] / 2) ** 2)
+        x0, y0 = point[0] * size[0], point[1] * size[1]
+        x1, y1 = (x0 - (size[0] / 2)) / r, (y0 - (size[1] / 2)) / r
+        a = radians(360 - angle)
+        c = complex(x1, y1) * complex(cos(a), sin(a))
+        self.pointing = ((c.real * r) + (self.sprites[0].get_width() / 2), (c.imag * r) + (self.sprites[0].get_height() / 2))
 
 
-    def hover(self, scale: float, *objects: Callable[[Tuple[int, int]], bool]) -> int:
-        pos = tuple(x / scale for x in pygame.mouse.get_pos())
+    def hover(self, *objects: Callable[[Tuple[int, int]], bool]) -> int:
+        pos = pygame.mouse.get_pos()
         out = -1
         for i, x in enumerate(objects):
             if x(pos):
@@ -137,13 +144,15 @@ class Cursor():
         return out
 
 
-    def draw(self, dim: Tuple[int, int], scale: float, *objects: Callable[[Tuple[int, int]], bool]) -> pygame.Surface:
-        hovered = self.hover(scale, *objects)
+    def draw(self, dim: Tuple[int, int], *objects: Callable[[Tuple[int, int]], bool]) -> pygame.Surface:
+        hovered = self.hover(*objects)
 
         if pygame.mouse.get_pressed()[0]: sprite = self.sprites[2]
         elif hovered == -1: sprite = self.sprites[0]
         else: sprite = self.sprites[1]
 
+        desksize = pygame.display.get_desktop_sizes()[0]
+        scale = min(1, desksize[0] / 1280, desksize[1] / 720)
         pos = tuple(x / scale for x in pygame.mouse.get_pos())
         pos = (pos[0] - self.pointing[0], pos[1] - self.pointing[1])
 

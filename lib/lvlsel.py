@@ -37,7 +37,7 @@ def restart() -> None:
 
 
 def init(window: pygame.Surface, scalar: float):
-    global dim, screen, scale, exist, mouse, place, buttons
+    global dim, screen, scale, exist, mouse, place, buttons, loaded
     dim = level.dim
     screen = window
     scale = scalar
@@ -59,27 +59,35 @@ def init(window: pygame.Surface, scalar: float):
         buttons.append(button(i))
     buttons = tuple(buttons)
 
-
-def run() -> int:
     lscreen = pygame.Surface(screen.get_size())
     bg = pygame.image.load("./sprites/level/bgb.png")
     bg = pygame.transform.scale(bg, lscreen.get_size())
     shade = pygame.Surface(lscreen.get_size())
-    shade.fill("white")
+    shade.fill("black")
     shade.set_alpha(69)
     bg.blit(shade, (0, 0))
     lscreen.blit(bg, (0, 0))
+    for i in range(exist):
+        sprite = pygame.image.load(f"./sprites/player/{'blue' if i <= done else 'red'}_player.png")
+        sprite = pygame.transform.scale(sprite, (lvlsel_size, lvlsel_size))
+        lscreen.blit(sprite, place(i))
+    loaded = lscreen
+
+
+def run() -> int:
+    lscreen = loaded.copy()
     
-    hovered = mouse.hover(scale, *buttons)
+    hovered = mouse.hover(*buttons)
 
     pygame.event.get()
 
     for i in range(exist):
-        sprite = pygame.image.load(f"./sprites/player/{'blue' if i <= done else 'red'}_player{'_hold' if i == hovered else ''}.png")
-        sprite = pygame.transform.scale(sprite, (lvlsel_size, lvlsel_size))
-        lscreen.blit(sprite, place(i))
+        if i == hovered:
+            sprite = pygame.image.load(f"./sprites/player/{'blue' if i <= done else 'red'}_player_hold.png")
+            sprite = pygame.transform.scale(sprite, (lvlsel_size, lvlsel_size))
+            lscreen.blit(sprite, place(i))
 
-    mice = mouse.draw(lscreen.get_size(), scale, *buttons)
+    mice = mouse.draw(lscreen.get_size(), *buttons)
     lscreen.blit(mice, (0, 0))
 
     screen.blit(lscreen, (0, 0))
