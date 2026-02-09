@@ -29,6 +29,8 @@ class player():
         self.motor = pymunk.SimpleMotor(self.center, self.body, 0)
         self.motor.collide_bodies = False
 
+        self.bb = pymunk.BB.newForCircle(self.body.position, player_size)
+
     
     def hold(self, b: bool):
         if self.holding != b:
@@ -61,6 +63,7 @@ class player():
     def move(self, direction: int, other: "player"):
         if self.holding and other.holding: self.motor.rate = 0
         else: self.motor.rate = player_speed if direction == 1 else -player_speed if direction == -1 else 0
+        self.bb = pymunk.BB.newForCircle(self.body.position, player_size)
             
             
     def __sub__(self, other: "player") -> float:
@@ -144,7 +147,7 @@ class Cursor():
         return out
 
 
-    def draw(self, dim: Tuple[int, int], *objects: Callable[[Tuple[int, int]], bool]) -> pygame.Surface:
+    def draw(self, dim: Tuple[int, int], *objects: Callable[[Tuple[int, int]], bool]) -> Tuple[pygame.Surface, int]:
         hovered = self.hover(*objects)
 
         if pygame.mouse.get_pressed()[0]: sprite = self.sprites[2]
@@ -161,4 +164,4 @@ class Cursor():
         overlay.blit(sprite, pos)
         overlay.set_colorkey("white")
         
-        return overlay
+        return (overlay, hovered if hovered != -1 and pygame.mouse.get_pressed()[0] else -1)

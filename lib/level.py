@@ -11,12 +11,11 @@ pygame.init()
 
 
 def init(window: pygame.Surface, scalar: float, level: int):
-    global screen, scale, running, space, clock, draw_options, player1, player2, hbody, ibody, dim, gp, levelnum, flag
+    global screen, scale, space, clock, draw_options, player1, player2, hbody, ibody, dim, gp, levelnum, flag
     screen = window
     scale = scalar
     levelnum = level
     clock = pygame.time.Clock()
-    running = True
     space = pymunk.Space()
     space.gravity = 0, gravity
     draw_options = pygame_util.DrawOptions(screen)
@@ -39,8 +38,8 @@ def init(window: pygame.Surface, scalar: float, level: int):
 
 
 
-def step():
-    global running, screen, space, clock, draw_options, player1, player2, hbody
+def step() -> bool:
+    global screen, space, clock, draw_options, player1, player2, hbody
     
     space.step(1 / 60)
     clock.tick(60)
@@ -93,7 +92,9 @@ def step():
             force = (cos(nangle) * player_push, sin(nangle) * player_push)
             player1.body.apply_force_at_world_point(force, player1.body.position)
     else: player2.move(n, player1)
-    
+
+    if player1.bb.intersects(flag) or player2.bb.intersects(flag): return True
+    else: return False
 
     # space.debug_draw(draw_options)
     # pygame.display.flip()

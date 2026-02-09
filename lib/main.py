@@ -12,19 +12,32 @@ pygame.display.set_caption("Codot")
 #pygame.mouse.set_visible(False)
 
 
-level.init(screen, scale, 4)
-draw.init()
-lvlsel.init(screen, scale)
-
 mode = 1
+first = True
+ran = 0
 
-if mode == 0:
-    while level.running:
-        level.step()
+lvlsel.load()
+
+while True:
+    if mode == 0:
+        if first:
+            level.init(screen, scale, ran)
+            draw.init()
+            first = False
+        if level.step():
+            mode = 1
+            first = True
+            lvlsel.save(lvlsel.done + 1)
         draw.draw()
         pygame.display.flip()
-
-elif mode == 1:
-    while True:
-        lvlsel.run()
+    
+    elif mode == 1:
+        if first:
+            lvlsel.init(screen, scale)
+            first = False
+        ran = lvlsel.run()
         pygame.display.flip()
+        if ran != -1:
+            mode = 0
+            first = True
+            lvl = ran

@@ -18,7 +18,7 @@ ground_type = 0
 
 
 def init():
-    global screen, space, scale, dim, gp, levelnum, lscreen, draw_options, player1, player2, new, invis
+    global screen, space, scale, dim, gp, levelnum, lscreen, draw_options, player1, player2, new, invis, loaded
     screen = level.screen
     space = level.space
     scale = level.scale
@@ -31,6 +31,7 @@ def init():
     player2 = level.player2
     new = nax
     invis = (not random.randint(0, 1000)) or (datetime.datetime.now().month == 4 and datetime.datetime.now().day == 1)
+    loaded = []
     
 
 scalef = lambda x1, y1, x2, y2 : min(x1 / x2, y1 / y2)

@@ -4,7 +4,6 @@ from typing import *
 from os import remove
 from classes import Cursor
 import level
-from time import sleep
 
 pygame.init()
 
@@ -17,6 +16,8 @@ done = 0
 def save(levelnum: int = done) -> int:
     with open("./save.txt", "w") as file:
         file.write(str(levelnum))
+    global done
+    done = levelnum
     return levelnum
 
 
@@ -37,8 +38,7 @@ def restart() -> None:
 
 
 def init(window: pygame.Surface, scalar: float):
-    global dim, screen, scale, exist, mouse, place, buttons, loaded
-    dim = level.dim
+    global screen, scale, exist, mouse, place, buttons, loaded
     screen = window
     scale = scalar
     exist = 0
@@ -87,8 +87,8 @@ def run() -> int:
             sprite = pygame.transform.scale(sprite, (lvlsel_size, lvlsel_size))
             lscreen.blit(sprite, place(i))
 
-    mice = mouse.draw(lscreen.get_size(), *buttons)
+    mice, out = mouse.draw(lscreen.get_size(), *buttons)
     lscreen.blit(mice, (0, 0))
 
     screen.blit(lscreen, (0, 0))
-    return 0
+    return out if out <= done else -1

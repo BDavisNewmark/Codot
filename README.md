@@ -11,5 +11,6 @@ A teamwork platformer where you play with two circles attached a fixed position 
 | `W` / `↑` | Stick to a sticky surface. |
 
 ## Credits
+
 * **Bach Davis** ﻿ ﻿ ﻿ ﻿ - ﻿ ﻿ ﻿ ﻿ *Code, Music*
 * **Nolan McCall** ﻿ ﻿ ﻿ ﻿ - ﻿ ﻿ ﻿ ﻿ *Artwork, Level Design*
