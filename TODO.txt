@@ -1,3 +1,4 @@
 - win screen (?)
 - sound effects / music
+- logo, favicon, etc
 - playtesting
