@@ -12,7 +12,8 @@ def load(level: int, space: pymunk.Space, sticky: pymunk.Body, icy: pymunk.Body,
         reader = csv.reader(c)
         for i, row in enumerate(reader):
             fric = True
-            if i == 0: output = [(float(row[0]), float(row[1])), (float(row[2]), float(row[3])), (float(row[4]), float(row[5])), (float(row[6]), float(row[7]))]
+            if i == 0:
+                output = [(float(row[0]), float(row[1])), (float(row[2]), float(row[3])), (float(row[4]), float(row[5])), (float(row[6]), float(row[7]))]
             else:
                 if "g" in row[0]:
                     if g: b = space.static_body
@@ -29,7 +30,8 @@ def load(level: int, space: pymunk.Space, sticky: pymunk.Body, icy: pymunk.Body,
                     space.add(x)                
                 elif "p" in row[0]:
                     points = []
-                    for i in range(1, len(row), 2): points.append((float(row[i]), float(row[i + 1])))
+                    for i in range(1, len(row), 2):
+                        points.append((float(row[i]), float(row[i + 1])))
                     x = pymunk.Poly(b, points) # type: ignore
                     x.friction = floor_friction if fric else ice_friction
                     space.add(x)

@@ -10,7 +10,7 @@ import datetime
 
 
 dev_mode = False
-ground_type = 0
+ground_type = 1
 # 0 - normal
 # 1 - sticky
 # 2 - icy
@@ -56,7 +56,8 @@ def draw():
             ground = loaded[0]
         dog = pygame_util.DrawOptions(lscreen)
         gspace.debug_draw(dog)
-        lscreen = pygame.transform.scale_by(lscreen, scalef(*screen.get_size(), *dim))
+        lscreen = pygame.transform.scale_by(lscreen, scalef(*screen.get_size(), *lscreen.get_size()))
+        pygame.draw.line(screen, "red", (lscreen.get_width(), 0), (lscreen.get_width(), screen.get_height()))
         screen.blit(lscreen, (0, 0))
         pygame.display.flip()
         new -= 1
