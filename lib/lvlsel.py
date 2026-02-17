@@ -3,15 +3,16 @@ from constants import *
 from typing import *
 from os import remove
 from classes import Cursor
-import level
+
 
 pygame.init()
+pygame.mixer.init()
 
 
 
 devmode = False
 done = 0
-
+hovering = False
 
 def save(levelnum: int = done) -> int:
     with open("./save.txt", "w") as file:
@@ -75,12 +76,21 @@ def init(window: pygame.Surface, scalar: float):
 
 
 def run() -> int:
+    global hovering
     lscreen = loaded.copy()
     
     hovered = mouse.hover(*buttons)
+    if hovered and not hovering:
+        pygame.mixer.Sound("./sounds/hover.mp3").play()
+        hovering = True
 
-    pygame.event.get()
-
+    events = pygame.event.get()
+    if pygame.MOUSEBUTTONDOWN in [x.type for x in events]:
+        if hovered:
+            pygame.mixer.Sound("./sounds/select.mp3").play()
+        else:
+            pygame.mixer.Sound("./sounds/click.mp3").play()
+    
     for i in range(exist):
         if i == hovered:
             sprite = pygame.image.load(f"./sprites/player/{'blue' if i <= done else 'red'}_player_hold.png")

@@ -4,6 +4,7 @@ from typing import *
 from constants import *
 from math import *
 pygame.init()
+pygame.mixer.init()
 
 
 
