@@ -2,6 +2,8 @@ import pygame
 import level
 import draw
 import lvlsel
+from constants import *
+from time import sleep
 
 
 
@@ -12,9 +14,13 @@ pygame.display.set_caption("Codot")
 pygame.mouse.set_visible(False)
 
 
-mode = 1
+mode = 2
 first = True
 ran = 0
+new = nax
+old = pygame.Surface(screen.get_size())
+cover = pygame.Surface(screen.get_size())
+cover.fill("black")
 
 lvlsel.load()
 
@@ -30,8 +36,27 @@ while True:
             lvlsel.save(lvlsel.done + 1)
         draw.draw()
         pygame.display.flip()
-    
+
     elif mode == 1:
+        if first:
+            new = 0
+            first = False
+            old = pygame.display.get_surface().copy()
+        elif new == nax:
+            mode = 2
+            first = True
+            continue
+        else:
+            new += 1
+        out = old.copy()
+        ontop = cover.copy()
+        ontop.set_alpha(int(255 * new / nax))
+        out.blit(ontop, (0, 0))
+        screen.blit(out, (0, 0))
+        pygame.display.flip()
+        sleep(fade_frame)
+    
+    elif mode == 2:
         if first:
             lvlsel.init(screen, scale)
             first = False
@@ -40,4 +65,4 @@ while True:
         if ran != -1:
             mode = 0
             first = True
-            lvl = ran
+            lvl = ran        

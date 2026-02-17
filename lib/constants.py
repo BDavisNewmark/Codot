@@ -24,3 +24,4 @@ lvlsel_gap = 20
 mouse_size = (50, 50)
 wax = 10
 nail_strength = 10000000
+fade_frame = .01
