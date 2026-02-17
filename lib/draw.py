@@ -9,7 +9,7 @@ import random
 import datetime
 
 
-dev_mode = False
+dev_mode = True
 ground_type = 1
 # 0 - normal
 # 1 - sticky
@@ -61,7 +61,8 @@ def draw():
         screen.blit(lscreen, (0, 0))
         pygame.display.flip()
         new -= 1
-        
+
+    
     else:
         lscreen = pygame.Surface(dim)
         screen.fill(behind)

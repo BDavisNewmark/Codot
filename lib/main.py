@@ -39,6 +39,10 @@ while True:
             mode = 1
             first = True
             lvlsel.save(lvlsel.done + 1)
+        elif pygame.key.get_pressed()[pygame.K_ESCAPE]:
+            mode = 1
+            first = True
+            continue
         draw.draw()
         pygame.display.flip()
 

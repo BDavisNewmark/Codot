@@ -9,6 +9,7 @@ A teamwork platformer where you play with two circles attached a fixed position 
 | `A` / `←` | Roll counter-clockwise. Move rod counterclockwise while stuck. |
 | `D` / `→` | Roll clockwise. Move rod clockwise while stuck. |
 | `W` / `↑` | Stick to a sticky surface. |
+| `esc` | Go back to level select screen. |
 
 ## Credits
 
