@@ -6,7 +6,9 @@ from classes import Cursor
 
 
 pygame.init()
-pygame.mixer.init()
+try: pygame.mixer.init()
+except pygame.error: sound = False
+else: sound = True
 
 
 
@@ -80,12 +82,12 @@ def run() -> int:
     lscreen = loaded.copy()
     
     hovered = mouse.hover(*buttons)
-    if hovered and not hovering:
+    if sound and hovered and not hovering:
         pygame.mixer.Sound("./sounds/hover.mp3").play()
         hovering = True
 
     events = pygame.event.get()
-    if pygame.MOUSEBUTTONDOWN in [x.type for x in events]:
+    if sound and pygame.MOUSEBUTTONDOWN in [x.type for x in events]:
         if hovered:
             pygame.mixer.Sound("./sounds/select.mp3").play()
         else:

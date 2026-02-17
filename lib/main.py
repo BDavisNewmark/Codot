@@ -5,6 +5,10 @@ import lvlsel
 from constants import *
 from time import sleep
 
+pygame.init()
+try: pygame.mixer.init()
+except pygame.error: sound = False
+else: sound = True
 
 
 desksize = pygame.display.get_desktop_sizes()[0]
@@ -43,6 +47,7 @@ while True:
             new = 0
             first = False
             old = pygame.display.get_surface().copy()
+            if sound: pygame.mixer.Sound("./sounds/win.mp3").play()
         elif new == nax:
             mode = 2
             first = True

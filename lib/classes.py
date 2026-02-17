@@ -3,9 +3,11 @@ import pymunk
 from typing import *
 from constants import *
 from math import *
-pygame.init()
-pygame.mixer.init()
 
+pygame.init()
+try: pygame.mixer.init()
+except pygame.error: sound = False
+else: sound = True
 
 
 class player():
