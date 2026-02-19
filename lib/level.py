@@ -7,6 +7,9 @@ import map
 from math import pi
 
 pygame.init()
+try: pygame.mixer.init()
+except pygame.error: sound = False
+else: sound = True
 
 
 
@@ -35,6 +38,11 @@ def init(window: pygame.Surface, scalar: float, level: int):
     space.add(rod)
 
     flag = pymunk.BB.newForCircle(gp, flag_size / 2)
+
+
+
+def collide(a: pymunk.Arbiter, file: str):
+    if a.is_first_contact and (a.bodies[0].id == player1.body.id or a.bodies[1].id == player1.body.id or a.bodies[0].id == player2.body.id or a.bodies[1].id == player2.body.id) and sound: pygame.mixer.Sound(f"./sounds/{file}.mp3").play()
 
 
 
@@ -92,6 +100,10 @@ def step() -> bool:
             force = (cos(nangle) * player_push, sin(nangle) * player_push)
             player1.body.apply_force_at_world_point(force, player1.body.position)
     else: player2.move(n, player1)
+
+    space.static_body.each_arbiter(collide(aiter, "ground"))
+    hbody.each_arbiter(collide(aiter, "sticky"))
+    ibody.each_arbiter(collide(aiter, "ice"))
 
     if player1.bb.intersects(flag) or player2.bb.intersects(flag): return True
     else: return False

@@ -39,6 +39,7 @@ class player():
         if self.holding != b:
             if b:
                 self.holding = True
+                if sound: pygame.mixer.Sound("./sounds/hold.mp3").play()
                 
                 self.hpointa = pymunk.Body(body_type = pymunk.Body.STATIC)
                 self.hpointa.position = self.body.position + (10, 10)
