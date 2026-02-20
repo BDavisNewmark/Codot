@@ -101,9 +101,9 @@ def step() -> bool:
             player1.body.apply_force_at_world_point(force, player1.body.position)
     else: player2.move(n, player1)
 
-    space.static_body.each_arbiter(collide(aiter, "ground"))
-    hbody.each_arbiter(collide(aiter, "sticky"))
-    ibody.each_arbiter(collide(aiter, "ice"))
+    space.static_body.each_arbiter(lambda a : collide(a, "ground"))
+    hbody.each_arbiter(lambda a : collide(a, "sticky"))
+    ibody.each_arbiter(lambda a : collide(a, "icy"))
 
     if player1.bb.intersects(flag) or player2.bb.intersects(flag): return True
     else: return False
