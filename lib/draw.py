@@ -30,7 +30,7 @@ def init():
     player1 = level.player1
     player2 = level.player2
     new = nax
-    invis = (not random.randint(0, 1000)) or (datetime.datetime.now().month == 4 and datetime.datetime.now().day == 1)
+    invis = (not random.randint(0, 100)) or (datetime.datetime.now().month == 4 and datetime.datetime.now().day == 1)
     loaded = []
     
 
