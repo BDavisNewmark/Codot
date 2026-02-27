@@ -5,12 +5,23 @@ from classes import *
 from constants import *
 import map
 from math import pi
+from pygame._sdl2 import controller
+
 
 pygame.init()
 try: pygame.mixer.init()
 except pygame.error: sound = False
 else: sound = True
+try: controller.init()
+except pygame.error: controlled = False
+else: controlled = True
 
+
+if controlled:
+    print(controller.get_count())
+    # pc1 = controller.Controller(0)
+    # pc2 = controller.Controller(1)
+    
 
 
 def init(window: pygame.Surface, scalar: float, level: int):
@@ -48,6 +59,8 @@ def collide(a: pymunk.Arbiter, file: str):
 
 def step() -> bool:
     global screen, space, clock, draw_options, player1, player2, hbody
+
+    # if controlled: print(pc1.attached())
     
     space.step(1 / 60)
     clock.tick(60)
