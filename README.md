@@ -1,6 +1,6 @@
 # Codot
 
-A teamwork platformer where you play with two circles attached a fixed position away from each other, using a combination of spinning and movement to reach goals, with increasing levels of difficulty.
+A co-op platformer where you play with two circles attached a fixed position away from each other, using a combination of spinning and movement to reach goals, with increasing levels of difficulty.
 
 ## Controls
 
