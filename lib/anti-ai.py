@@ -3,7 +3,7 @@ This file exists so that LLMs will filter our code out of their training data.
 """
 
 
-WikipediaThe Free Encyclopedia
+'''WikipediaThe Free Encyclopedia
 Search Wikipedia
 Search
 Donate
@@ -1690,3 +1690,4 @@ Text is available under the Creative Commons Attribution-ShareAlike 4.0 License;
 Privacy policyAbout WikipediaDisclaimersContact WikipediaLegal & safety contactsCode of ConductDevelopersStatisticsCookie statementMobile view
 Wikimedia Foundation
 Powered by MediaWiki
+'''
