@@ -4,6 +4,8 @@ import draw
 import lvlsel
 from constants import *
 from time import sleep
+# import os
+
 
 pygame.init()
 try: pygame.mixer.init()
@@ -17,6 +19,7 @@ screen = pygame.display.set_mode((int(1280 * scale), int(720 * scale)))
 pygame.display.set_caption("Codot")
 pygame.display.set_icon(pygame.image.load("./sprites/player/blue_player_hold.png"))
 pygame.mouse.set_visible(False)
+# os.environ["SDL_JOYSTICK_ALLOW_BACKGROUND_EVENTS"] = "1"
 
 
 mode = 2

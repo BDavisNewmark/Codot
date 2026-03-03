@@ -5,22 +5,30 @@ from classes import *
 from constants import *
 import map
 from math import pi
-from pygame._sdl2 import controller
+# from pygame._sdl2 import controller
 
 
 pygame.init()
 try: pygame.mixer.init()
 except pygame.error: sound = False
 else: sound = True
-try: controller.init()
+"""try:
+    controller.init()
+    pygame.joystick.init()
 except pygame.error: controlled = False
-else: controlled = True
+else: controlled = True"""
 
 
-if controlled:
-    print(controller.get_count())
+"""if controlled:
+    # controller.get_eventstate()
+    # print(controller.get_count())
     # pc1 = controller.Controller(0)
     # pc2 = controller.Controller(1)
+
+    # pc1 = pygame.joystick.Joystick(0)
+    pygame.event.get()
+    joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
+    print(pygame.joystick.get_count())"""
     
 
 

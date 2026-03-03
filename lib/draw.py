@@ -9,7 +9,7 @@ import random
 import datetime
 
 
-dev_mode = True
+dev_mode = False
 ground_type = 1
 # 0 - normal
 # 1 - sticky
