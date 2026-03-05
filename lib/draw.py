@@ -9,8 +9,8 @@ import random
 import datetime
 
 
-dev_mode = True
-ground_type = 1
+dev_mode = False
+ground_type = 2
 # 0 - normal
 # 1 - sticky
 # 2 - icy
