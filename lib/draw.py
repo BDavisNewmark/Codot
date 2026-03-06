@@ -118,7 +118,7 @@ def draw():
             img3.set_colorkey("white")
             loaded.append(img3)
         else:
-            img3 = loaded[2]
+            img3 = loaded[3]
         lscreen.blit(img3, (0, 0))
 
         if new == nax:
