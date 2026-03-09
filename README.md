@@ -13,5 +13,5 @@ A co-op platformer where you play with two circles attached a fixed position awa
 
 ## Credits
 
-* **Bach Davis** ﻿ ﻿ ﻿ ﻿ - ﻿ ﻿ ﻿ ﻿ *Code, Music*
-* **Nolan McCall** ﻿ ﻿ ﻿ ﻿ - ﻿ ﻿ ﻿ ﻿ *Artwork, Level Design*
+* **Bach Davis *(@staetyk)*** ﻿ ﻿ ﻿ ﻿ - ﻿ ﻿ ﻿ ﻿ *Code, Music*
+* **Nolan McCall *(@hdhffkdj)*** ﻿ ﻿ ﻿ ﻿ - ﻿ ﻿ ﻿ ﻿ *Artwork, Level Design*
