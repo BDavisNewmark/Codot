@@ -1,4 +1,4 @@
-# Codot
+# CoDot
 
 A co-op platformer where you play with two circles attached a fixed position away from each other, using a combination of spinning and movement to reach goals, with increasing levels of difficulty.
 
@@ -13,5 +13,5 @@ A co-op platformer where you play with two circles attached a fixed position awa
 
 ## Credits
 
-* **Bach Davis *(@staetyk)*** ﻿ ﻿ ﻿ ﻿ - ﻿ ﻿ ﻿ ﻿ *Code, Music*
-* **Nolan McCall *(@hdhffkdj)*** ﻿ ﻿ ﻿ ﻿ - ﻿ ﻿ ﻿ ﻿ *Artwork, Level Design*
+* **Bach Davis *([staetyk](https://github.com/staetyk))*** ﻿ ﻿ ﻿ ﻿ - ﻿ ﻿ ﻿ ﻿ *Code, Music*
+* **Nolan McCall *([hdhffkdj](https://github.com/hdhffkdj))*** ﻿ ﻿ ﻿ ﻿ - ﻿ ﻿ ﻿ ﻿ *Artwork, Level Design*
