@@ -1,3 +1,4 @@
+- add kill part
 - music
 - more levels
 - playtesting

@@ -10,7 +10,7 @@ import datetime
 
 
 dev_mode = False
-ground_type = 0
+ground_type = 1
 # 0 - normal
 # 1 - sticky
 # 2 - icy
