@@ -10,10 +10,11 @@ import datetime
 
 
 dev_mode = False
-ground_type = 1
+ground_type = 3
 # 0 - normal
 # 1 - sticky
 # 2 - icy
+# 3 - all
 
 
 
@@ -50,7 +51,7 @@ def draw():
         ibody = pymunk.Body(body_type = pymunk.Body.STATIC)
         gspace.add(hbody, ibody)
         if new:
-            ground = map.load(levelnum, gspace, hbody, ibody, ground_type == 0, ground_type == 1, ground_type == 2)
+            ground = map.load(levelnum, gspace, hbody, ibody, ground_type == 0 or ground_type == 3, ground_type == 1 or ground_type == 3, ground_type == 2 or ground_type == 3)
             loaded.append(ground)
         else:
             ground = loaded[0]

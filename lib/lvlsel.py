@@ -83,15 +83,15 @@ def run() -> int:
     
     hovered = mouse.hover(*buttons)
     if sound and hovered and not hovering:
-        pygame.mixer.Sound("./sounds/hover.mp3").play()
+        pygame.mixer.Sound("./audio/hover.mp3").play()
         hovering = True
 
     events = pygame.event.get()
     if sound and pygame.MOUSEBUTTONDOWN in [x.type for x in events]:
         if hovered:
-            pygame.mixer.Sound("./sounds/select.mp3").play()
+            pygame.mixer.Sound("./audio/select.mp3").play()
         else:
-            pygame.mixer.Sound("./sounds/click.mp3").play()
+            pygame.mixer.Sound("./audio/click.mp3").play()
     
     for i in range(exist):
         if i == hovered:

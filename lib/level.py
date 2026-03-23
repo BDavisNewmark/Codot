@@ -39,6 +39,9 @@ def init(window: pygame.Surface, scalar: float, level: int):
     levelnum = level
     clock = pygame.time.Clock()
     space = pymunk.Space()
+    space.sleep_time_threshold = 0.5
+    space.collision_persistence = 3
+    space.iterations = 7
     space.gravity = 0, gravity
     draw_options = pygame_util.DrawOptions(screen)
     hbody = pymunk.Body(body_type = pymunk.Body.STATIC)
@@ -61,11 +64,11 @@ def init(window: pygame.Surface, scalar: float, level: int):
 
 
 def collide(a: pymunk.Arbiter, file: str):
-    if a.is_first_contact and (a.bodies[0].id == player1.body.id or a.bodies[1].id == player1.body.id or a.bodies[0].id == player2.body.id or a.bodies[1].id == player2.body.id) and sound: pygame.mixer.Sound(f"./sounds/{file}.mp3").play()
+    if a.is_first_contact and (a.bodies[0].id == player1.body.id or a.bodies[1].id == player1.body.id or a.bodies[0].id == player2.body.id or a.bodies[1].id == player2.body.id) and sound: pygame.mixer.Sound(f"./audio/{file}.mp3").play()
 
 
 
-def step() -> bool:
+def step() -> int:
     global screen, space, clock, draw_options, player1, player2, hbody
 
     # if controlled: print(pc1.attached())
@@ -126,8 +129,9 @@ def step() -> bool:
     hbody.each_arbiter(lambda a : collide(a, "sticky"))
     ibody.each_arbiter(lambda a : collide(a, "icy"))
 
-    if player1.bb.intersects(flag) or player2.bb.intersects(flag): return True
-    else: return False
+    if player1.bb.intersects(flag) or player2.bb.intersects(flag): return 1
+    elif player1.body.position[1] > dim[1] + barrier or player2.body.position[1] > dim[1] + barrier: return 2
+    else: return 0
 
     # space.debug_draw(draw_options)
     # pygame.display.flip()

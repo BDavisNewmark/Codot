@@ -38,10 +38,15 @@ while True:
             level.init(screen, scale, ran)
             draw.init()
             first = False
-        if level.step():
+        step = level.step()
+        if step == 1:
             mode = 1
             first = True
             lvlsel.save(lvlsel.done + 1)
+        elif step == 2:
+            if sound: pygame.mixer.Sound("./audio/thump.mp3").play()
+            first = True
+            continue
         elif pygame.key.get_pressed()[pygame.K_ESCAPE]:
             mode = 1
             first = True
@@ -54,7 +59,7 @@ while True:
             new = 0
             first = False
             old = pygame.display.get_surface().copy()
-            if sound: pygame.mixer.Sound("./sounds/win.mp3").play()
+            if sound: pygame.mixer.Sound("./audio/win.mp3").play()
         elif new == nax:
             mode = 2
             first = True
