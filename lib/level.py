@@ -41,7 +41,7 @@ def init(window: pygame.Surface, scalar: float, level: int):
     space = pymunk.Space()
     space.sleep_time_threshold = 0.5
     space.collision_persistence = 3
-    space.iterations = 7
+    space.iterations = 3
     space.gravity = 0, gravity
     draw_options = pygame_util.DrawOptions(screen)
     hbody = pymunk.Body(body_type = pymunk.Body.STATIC)
