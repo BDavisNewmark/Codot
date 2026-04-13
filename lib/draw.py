@@ -9,8 +9,8 @@ import random
 import datetime
 
 
-dev_mode = True
-ground_type = 1
+dev_mode = False
+ground_type = 3
 # 0 - normal
 # 1 - sticky
 # 2 - icy
@@ -85,7 +85,7 @@ def draw():
         
         if new == nax:
             try:
-                img1 = pygame.image.load(f"./sprites/maps/level_{levelnum}/normal.png")
+                img1 = pygame.image.load(f"./sprites/maps/level_{levelnum}/sticky.png")
                 if invis: img1 = pygame.transform.laplacian(img1)
             except:
                 img1 = pygame.Surface((1, 1))
@@ -98,7 +98,7 @@ def draw():
         
         if new == nax:
             try:
-                img2 = pygame.image.load(f"./sprites/maps/level_{levelnum}/sticky.png")
+                img2 = pygame.image.load(f"./sprites/maps/level_{levelnum}/icy.png")
                 if invis: img2 = pygame.transform.laplacian(img2)
             except:
                 img2 = pygame.Surface((1, 1))
@@ -111,7 +111,7 @@ def draw():
 
         if new == nax:
             try:
-                img3 = pygame.image.load(f"./sprites/maps/level_{levelnum}/icy.png")
+                img3 = pygame.image.load(f"./sprites/maps/level_{levelnum}/normal.png")
                 if invis: img3 = pygame.transform.laplacian(img3)
             except:
                 img3 = pygame.Surface((1, 1))
