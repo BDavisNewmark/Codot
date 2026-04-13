@@ -125,9 +125,10 @@ def step() -> int:
             player1.body.apply_force_at_world_point(force, player1.body.position)
     else: player2.move(n, player1)
 
-    space.static_body.each_arbiter(lambda a : collide(a, "ground"))
-    hbody.each_arbiter(lambda a : collide(a, "sticky"))
-    ibody.each_arbiter(lambda a : collide(a, "icy"))
+    if sound:
+        space.static_body.each_arbiter(lambda a : collide(a, "ground"))
+        hbody.each_arbiter(lambda a : collide(a, "sticky"))
+        ibody.each_arbiter(lambda a : collide(a, "icy"))
 
     if player1.bb.intersects(flag) or player2.bb.intersects(flag): return 1
     elif player1.body.position[1] > dim[1] + barrier or player2.body.position[1] > dim[1] + barrier: return 2

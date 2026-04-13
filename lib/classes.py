@@ -62,7 +62,7 @@ class player():
             else:
                 self.holding = False
                 return (self.hjointa, self.hpointa.shape, self.hpointa, self.hjointb, self.hpointb.shape, self.hpointb)
-
+                
     
     def move(self, direction: int, other: "player"):
         if self.holding and other.holding: self.motor.rate = 0
@@ -86,6 +86,8 @@ class player():
                 can = True
                 break
         return can
+
+        # optimize?
 
     
     def spriter(self, modify: float) -> pygame.Surface:
