@@ -9,6 +9,11 @@ import random
 import datetime
 
 
+try: pygame.mixer.init()
+except pygame.error: sound = False
+else: sound = True
+
+
 dev_mode = False
 ground_type = 3
 # 0 - normal
@@ -80,7 +85,9 @@ def draw():
             loaded.append(bg)
         else:
             bg = loaded[0]
-        if invis: bg = pygame.transform.laplacian(bg)
+        if invis:
+            bg = pygame.transform.laplacian(bg)
+            if sound: pygame.mixer.Sound("./audio/shh.mp3").play()
         lscreen.blit(bg, (0, 0))
         
         if new == nax:

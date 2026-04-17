@@ -50,6 +50,8 @@ def init(window: pygame.Surface, scalar: float):
         except: break
         else: exist += 1
 
+    if sound: pygame.mixer.stop()
+
     mouse = Cursor(point = (1/2, 1), size = mouse_size)
 
     place = lambda n : ((n % lvlsel_grid[0]) * (lvlsel_size + lvlsel_gap) + (screen.get_width() - lvlsel_size * lvlsel_grid[0] - lvlsel_gap * (lvlsel_grid[0] - 1)) // 2, (n // lvlsel_grid[0]) * (lvlsel_size + lvlsel_gap) + (screen.get_height() - lvlsel_size * lvlsel_grid[1] - lvlsel_gap * (lvlsel_grid[1] - 1)) // 2)
