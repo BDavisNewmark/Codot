@@ -81,10 +81,18 @@ class player():
     
     def holdable(self, sticky: pymunk.Body, space: pymunk.Space) -> bool:
         can = False
+
+        """def stickiness(a: pymunk.Arbiter):
+            global can
+            if a.bodies[0] is sticky or a.bodies[1] is sticky: can = True
+
+        self.body.each_arbiter(stickiness)"""
+        
         for x in space.shape_query(self.shape):
             if sticky is x.shape.body:
                 can = True
                 break
+
         return can
 
         # optimize?

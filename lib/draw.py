@@ -15,7 +15,7 @@ else: sound = True
 
 
 dev_mode = False
-ground_type = 3
+ground_type = 1
 # 0 - normal
 # 1 - sticky
 # 2 - icy
