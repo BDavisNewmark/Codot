@@ -11,13 +11,16 @@ A co-op physics-based game where you play with two circles attached a fixed posi
 | `W` / `↑` | Stick to a sticky surface. |
 | `esc` | Go back to level select screen. |
 
+**Blue** Player is **Player 1** (WASD)
+**Red** Player is **Player 2** (Arrow Keys)
+
 ## Ground Types
 
-|Color|Name|Behavior|
-|:---:|:--:|:---:|
-|Gray|Normal Ground|Cannot stick, normal friction|
-|Mottled Brown|Sticky Ground|Can stick, normal friction|
-|Striped Light Blue|Icy Ground|Cannot stick, lower friction|
+| Name | Color | Behavior |
+| :---: | :--: | :--- |
+| Normal Ground | Gray | Cannot stick, normal friction |
+| Sticky Ground | Mottled Brown | Can stick, normal friction |
+| Icy Ground | Striped Light Blue | Cannot stick, lower friction |
 
 ## Credits
 
