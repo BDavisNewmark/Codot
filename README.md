@@ -14,7 +14,7 @@ A co-op physics-based game where you play with two circles attached a fixed posi
 | `W` / `↑` | Stick to a sticky surface. |
 | `esc` | Go back to level select screen. |
 
-**Blue** Player is **Player 1** (WASD)
+**Blue** Player is **Player 1** (WASD) <br>
 **Red** Player is **Player 2** (Arrow Keys)
 
 ## Ground Types
@@ -27,5 +27,5 @@ A co-op physics-based game where you play with two circles attached a fixed posi
 
 ## Credits
 
-* **Bach Davis *([**@staetyk**](https://github.com/staetyk) | [**@schooltyk**](https://github.com/bdavisnewmark))*** ﻿ ﻿ ﻿ ﻿ - ﻿ ﻿ ﻿ ﻿ *Code, Music, Sound Effects*
-* **Nolan McCall *([**@hdhffkdj**](https://github.com/hdhffkdj))*** ﻿ ﻿ ﻿ ﻿ - ﻿ ﻿ ﻿ ﻿ *Artwork, Level Design*
+* **Bach Davis (*[**@staetyk**](https://github.com/staetyk) | [**@schooltyk**](https://github.com/bdavisnewmark)*)** ﻿ ﻿ ﻿ ﻿ - ﻿ ﻿ ﻿ ﻿ *Code, Music, Sound Effects*
+* **Nolan McCall (*[**@hdhffkdj**](https://github.com/hdhffkdj)*)** ﻿ ﻿ ﻿ ﻿ - ﻿ ﻿ ﻿ ﻿ *Artwork, Level Design*
