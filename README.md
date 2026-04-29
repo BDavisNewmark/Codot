@@ -2,7 +2,7 @@
 
 A co-op physics-based game where you play with two circles attached a fixed position away from each other, using a combination of spinning and movement to reach goals, with increasing levels of difficulty. Levels will focus on a variety of gimmicks which differ from level to level.
 
-<img src="/sprites/QRCode.png" alt="QR Code to GitHub Repository" width="auto" height="20%">
+<img src="/sprites/QRCode.png" alt="QR Code to GitHub Repository" width="200" height="auto">
 
 ## Controls
 
