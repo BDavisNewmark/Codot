@@ -1,6 +1,6 @@
 # CoDot
 
-A co-op physics-based game where you play with two circles attached a fixed position away from each other, using a combination of spinning and movement to reach goals, with increasing levels of difficulty.
+A co-op physics-based game where you play with two circles attached a fixed position away from each other, using a combination of spinning and movement to reach goals, with increasing levels of difficulty. Levels will focus on a variety of gimmicks which differ from level to level.
 
 ## Controls
 
@@ -10,6 +10,14 @@ A co-op physics-based game where you play with two circles attached a fixed posi
 | `D` / `→` | Roll clockwise. Move rod clockwise while stuck. |
 | `W` / `↑` | Stick to a sticky surface. |
 | `esc` | Go back to level select screen. |
+
+## Ground Types
+
+|Color|Name|Behavior|
+|:---:|:--:|:---:|
+|Gray|Normal Ground|Cannot stick, normal friction|
+|Mottled Brown|Sticky Ground|Can stick, normal friction|
+|Striped Light Blue|Icy Ground|Cannot stick, lower friction|
 
 ## Credits
 

@@ -12,8 +12,8 @@ else: sound = True
 
 class player():
     def __init__(self, x: float, y: float, sprites: Tuple[str, str]):
-        self.spriteN = pygame.image.load(f"./sprites/player/{sprites[0]}")
-        self.spriteH = pygame.image.load(f"./sprites/player/{sprites[1]}")
+        self.spriteN = pygame.transform.scale(pygame.image.load(f"./sprites/player/{sprites[0]}"), (player_size * 2, player_size * 2))
+        self.spriteH = pygame.transform.scale(pygame.image.load(f"./sprites/player/{sprites[1]}"), (player_size * 2, player_size * 2))
         self.holding = False
         self.sprite = lambda : self.spriteH if self.holding else self.spriteN
         
@@ -100,7 +100,6 @@ class player():
     
     def spriter(self, modify: float) -> pygame.Surface:
         image = self.sprite()
-        image = pygame.transform.scale(image, (player_size * 2, player_size * 2))
         image = pygame.transform.rotate(image, -degrees(self.body.angle) - modify)
         return image
 

@@ -14,7 +14,7 @@ except pygame.error: sound = False
 else: sound = True
 
 
-dev_mode = False
+dev_mode = True
 ground_type = 0
 # 0 - normal
 # 1 - sticky
@@ -48,7 +48,7 @@ loaded = []
 new = nax
 
 def draw():
-    global lscreen, new, loaded, cover
+    global lscreen, new, loaded, cover, backall
     if dev_mode:
         lscreen.fill("white")
         gspace = pymunk.Space()
@@ -73,7 +73,6 @@ def draw():
         lscreen = pygame.Surface(dim)
         screen.fill(behind)
         if invis: lscreen.fill("white")
-        else: lscreen.fill(behind)
 
         if new == nax:
             bg = pygame.image.load("./sprites/level/bgb.png")
@@ -82,15 +81,11 @@ def draw():
             shade.fill("white")
             shade.set_alpha(69)
             bg.blit(shade, (0, 0))
-            loaded.append(bg)
-        else:
-            bg = loaded[0]
-        if invis:
-            bg = pygame.transform.laplacian(bg)
-            if sound: pygame.mixer.Sound("./audio/shh.mp3").play()
-        lscreen.blit(bg, (0, 0))
-        
-        if new == nax:
+            if invis:
+                bg = pygame.transform.laplacian(bg)
+                if sound: pygame.mixer.Sound("./audio/shh.mp3").play()
+            lscreen.blit(bg, (0, 0))
+            
             try:
                 img1 = pygame.image.load(f"./sprites/maps/level_{levelnum}/sticky.png")
                 if invis: img1 = pygame.transform.laplacian(img1)
@@ -98,12 +93,8 @@ def draw():
                 img1 = pygame.Surface((1, 1))
                 img1.fill("white")
             img1.set_colorkey("white")
-            loaded.append(img1)
-        else:
-            img1 = loaded[1]
-        lscreen.blit(img1, (0, 0))
+            lscreen.blit(img1, (0, 0))
         
-        if new == nax:
             try:
                 img2 = pygame.image.load(f"./sprites/maps/level_{levelnum}/icy.png")
                 if invis: img2 = pygame.transform.laplacian(img2)
@@ -111,12 +102,8 @@ def draw():
                 img2 = pygame.Surface((1, 1))
                 img2.fill("white")
             img2.set_colorkey("white")
-            loaded.append(img2)
-        else:
-            img2 = loaded[2]
-        lscreen.blit(img2, (0, 0))
+            lscreen.blit(img2, (0, 0))
 
-        if new == nax:
             try:
                 img3 = pygame.image.load(f"./sprites/maps/level_{levelnum}/normal.png")
                 if invis: img3 = pygame.transform.laplacian(img3)
@@ -124,12 +111,8 @@ def draw():
                 img3 = pygame.Surface((1, 1))
                 img3.fill("white")
             img3.set_colorkey("white")
-            loaded.append(img3)
-        else:
-            img3 = loaded[3]
-        lscreen.blit(img3, (0, 0))
+            lscreen.blit(img3, (0, 0))
 
-        if new == nax:
             texts = pygame.Surface(lscreen.get_size())
             texts.fill("white")
             texts.set_colorkey("white")
@@ -137,19 +120,16 @@ def draw():
             if len(m) > 4:
                 for x in m[4:]:
                     texts.blit(x[0], (x[1], x[2]))
-            loaded.append(texts)
-        else:
-            texts = loaded[4]
-        if not invis: lscreen.blit(texts, (0, 0))
+            if not invis: lscreen.blit(texts, (0, 0))
                 
-        if new == nax:
             goal = pygame.image.load("./sprites/level/flag.png")
             if invis: goal = pygame.transform.laplacian(goal)
             goal = pygame.transform.scale(goal, (flag_size, flag_size))
-            loaded.append(goal)
-        else:
-            goal = loaded[5]
-        lscreen.blit(goal, (gp[0] - goal.get_width() / 2, gp[1] - goal.get_height()))
+            lscreen.blit(goal, (gp[0] - goal.get_width() / 2, gp[1] - goal.get_height()))
+
+            backall = lscreen.copy()
+
+        else: lscreen.blit(backall, (0, 0))
 
         if new == nax:
             girth = player1.shape.radius * rod_girth
@@ -157,8 +137,8 @@ def draw():
             rod = pygame.image.load("./sprites/player/rod.png")
             loaded.append(rod)
         else:
-            girth = loaded[6]
-            rod = loaded[7]
+            girth = loaded[0]
+            rod = loaded[1]
             rod = pygame.transform.scale(rod, (player1 + player2, girth))
             rod = pygame.transform.rotate(rod, -degrees(player1 - player2))
         if invis: rod = pygame.transform.laplacian(rod)
