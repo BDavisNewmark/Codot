@@ -2,6 +2,8 @@
 
 A co-op physics-based game where you play with two circles attached a fixed position away from each other, using a combination of spinning and movement to reach goals, with increasing levels of difficulty. Levels will focus on a variety of gimmicks which differ from level to level.
 
+![QR Code to Repository](/sprites/QRCode.png)
+
 ## Controls
 
 | Key | Action |
@@ -24,5 +26,5 @@ A co-op physics-based game where you play with two circles attached a fixed posi
 
 ## Credits
 
-* **Bach Davis *([**@staetyk**](https://github.com/staetyk) / [**@schooltyk**](https://github.com/bdavisnewmark))*** ﻿ ﻿ ﻿ ﻿ - ﻿ ﻿ ﻿ ﻿ *Code, Music, Sound Effects*
+* **Bach Davis *([**@staetyk**](https://github.com/staetyk) | [**@schooltyk**](https://github.com/bdavisnewmark))*** ﻿ ﻿ ﻿ ﻿ - ﻿ ﻿ ﻿ ﻿ *Code, Music, Sound Effects*
 * **Nolan McCall *([**@hdhffkdj**](https://github.com/hdhffkdj))*** ﻿ ﻿ ﻿ ﻿ - ﻿ ﻿ ﻿ ﻿ *Artwork, Level Design*
