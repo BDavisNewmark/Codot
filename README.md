@@ -17,10 +17,10 @@ A co-op physics-based game where you play with two circles attached a fixed posi
 ## Ground Types
 
 | Name | Color | Behavior |
-| :---: | :--: | :--- |
-| Normal Ground | Gray | Cannot stick, normal friction |
-| Sticky Ground | Mottled Brown | Can stick, normal friction |
-| Icy Ground | Striped Light Blue | Cannot stick, lower friction |
+| :---: | :--- | :--- |
+| `Stone` | Gray | Cannot stick, normal friction |
+| `Dirt` | Mottled Brown | Can stick, normal friction |
+| `Ice` | Striped Light Blue | Cannot stick, lower friction |
 
 ## Credits
 
