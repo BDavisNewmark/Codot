@@ -14,7 +14,7 @@ except pygame.error: sound = False
 else: sound = True
 
 
-dev_mode = True
+dev_mode = False
 ground_type = 3
 # 0 - normal
 # 1 - sticky
