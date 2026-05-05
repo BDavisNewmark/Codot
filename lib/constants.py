@@ -4,7 +4,7 @@ pygame.font.init()
 player_mass = 10
 player_size = 40
 player_speed = 10
-player_friction = .6
+player_friction = .5
 gravity = 900
 center_friction = .5
 floor_friction = 1
