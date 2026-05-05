@@ -4,7 +4,7 @@ pygame.font.init()
 player_mass = 10
 player_size = 40
 player_speed = 10
-player_friction = .5
+player_friction = .6
 gravity = 900
 center_friction = .5
 floor_friction = 1
@@ -25,4 +25,4 @@ mouse_size = (50, 50)
 wax = 10
 nail_strength = 10000000
 fade_frame = .01
-barrier = 150
+barrier = 300
