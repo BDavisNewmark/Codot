@@ -14,8 +14,8 @@ except pygame.error: sound = False
 else: sound = True
 
 
-dev_mode = False
-ground_type = 3
+dev_mode = True
+ground_type = 1
 # 0 - normal
 # 1 - sticky
 # 2 - icy
@@ -36,7 +36,7 @@ def init():
     player1 = level.player1
     player2 = level.player2
     new = nax
-    invis = (not random.randint(0, 100)) or (datetime.datetime.now().month == 4 and datetime.datetime.now().day == 1)
+    invis = (not random.randint(0, 500)) or (datetime.datetime.now().month == 4 and datetime.datetime.now().day == 1)
     loaded = []
     
 

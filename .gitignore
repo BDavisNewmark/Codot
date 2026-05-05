@@ -160,3 +160,8 @@ cython_debug/
 
 # game stuff
 save.txt
+IDEAS.txt
+TODO.txt
+level_syntax.csv
+.replit
+pyproject.toml
