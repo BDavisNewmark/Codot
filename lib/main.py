@@ -42,7 +42,7 @@ while True:
         if step == 1:
             mode = 1
             first = True
-            lvlsel.save(lvlsel.done + ran)
+            lvlsel.save(ran)
         elif step == 2:
             if sound: pygame.mixer.Sound("./audio/thump.mp3").play()
             first = True
